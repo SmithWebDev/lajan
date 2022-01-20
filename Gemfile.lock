@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    Smith_View_Tool (0.1.0)
     actioncable (7.0.1)
       actionpack (= 7.0.1)
       activesupport (= 7.0.1)
@@ -213,6 +214,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  Smith_View_Tool
   annotate
   better_errors
   binding_of_caller
