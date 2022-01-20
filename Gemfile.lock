@@ -90,9 +90,13 @@ GEM
     debug_inspector (1.1.0)
     digest (3.1.0)
     erubi (1.10.0)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hirb (0.7.3)
+    hotwire-livereload (1.1.0)
+      listen (>= 3.0.0)
+      rails (>= 6.0.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -104,6 +108,9 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.0)
       railties (>= 6.0.0)
+    listen (3.7.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -168,6 +175,9 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rb-fsevent (0.11.0)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
     redis (4.5.1)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -210,6 +220,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   hirb
+  hotwire-livereload
   jbuilder
   jsbundling-rails
   pg (~> 1.1)

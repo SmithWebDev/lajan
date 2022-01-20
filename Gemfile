@@ -36,6 +36,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'hotwire-livereload'
   gem "web-console"
   gem 'better_errors'
   gem 'binding_of_caller'
