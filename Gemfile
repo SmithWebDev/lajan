@@ -13,6 +13,7 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 gem "jbuilder"
 gem "redis", "~> 4.0"
+gem 'hirb'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -35,6 +36,8 @@ end
 
 group :development do
   gem "web-console"
+  gem 'better_errors'
+  gem 'binding_of_caller'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
