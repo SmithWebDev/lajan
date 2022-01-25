@@ -15,6 +15,7 @@ gem "jbuilder"
 gem "redis", "~> 4.0"
 gem 'hirb'
 gem 'Smith_View_Tool'
+gem 'devise'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -39,6 +40,7 @@ group :development do
   gem 'annotate'
   gem 'hotwire-livereload'
   gem "web-console"
+  gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
 
