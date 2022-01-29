@@ -3,7 +3,19 @@
 #### Name:          Lajan Mache
 
 #### Tech Stack
-* Rails
+* Ruby 3.1
+* Rails 7
+* PostgreSQL
+* Gems Used:
+  * Annotate
+  * Better Errors
+  * Binding of Caller
+  * Devise
+  * Hirb
+  * Hotwire LiveReload
+  * Letter Opener
+  * Rspec
+  * SmithViewTool
 
 #### Design
 * Users:            intended users of the application
@@ -25,6 +37,6 @@
   * Show Projected Annual Dividend
   * Show Dividend increase since purchase
   * Add Number of Shares (owned/ to own)
-  * Show Company Data on Account Dashboard
+  * Show limited Company Data on Account Dashboard
 * Calculate expected Monthly/ Annual Dividend Payout
 * Show Company Data on Company page
