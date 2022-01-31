@@ -16,6 +16,11 @@ gem "redis", "~> 4.0"
 gem 'hirb'
 gem 'Smith_View_Tool'
 gem 'devise'
+gem 'dotenv-rails', '~> 2.7'
+
+# Project Based Gems
+gem 'alphavantagerb', '~> 1.4'
+gem 'stock_quote', '~> 3.0'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
