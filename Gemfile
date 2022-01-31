@@ -20,6 +20,9 @@ gem 'dotenv-rails', '~> 2.7'
 gem 'ffaker', '~> 2.18'
 
 # Project Based Gems
+gem 'chartkick', '~> 4.1', '>= 4.1.3'
+gem 'groupdate', '~> 6.0', '>= 6.0.1'
+gem 'apexcharts', '~> 0.1.11'
 gem 'alphavantagerb', '~> 1.4'
 gem 'stock_quote', '~> 3.0'
 
