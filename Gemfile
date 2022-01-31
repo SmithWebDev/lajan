@@ -17,6 +17,7 @@ gem 'hirb'
 gem 'Smith_View_Tool'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
+gem 'ffaker', '~> 2.18'
 
 # Project Based Gems
 gem 'alphavantagerb', '~> 1.4'
