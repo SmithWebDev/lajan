@@ -18,7 +18,7 @@
   * SmithViewTool
 
 #### Design
-* Users:            intended users of the application
+* Users:            common users, subscribed users, admin users
 * Accounts:         Users are able to manage funds in multiple accounts, allowing for varying strategies/planning
 * Account Holdings: connects Accounts with Company data available
 * Company:          Actual companies listing
