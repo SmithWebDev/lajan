@@ -23,7 +23,7 @@ gem 'ffaker', '~> 2.18'
 gem 'chartkick', '~> 4.1', '>= 4.1.3'
 gem 'groupdate', '~> 6.0', '>= 6.0.1'
 gem 'apexcharts', '~> 0.1.11'
-gem 'alphavantagerb', '~> 1.4'
+gem 'alphavantagerb', github: 'smithwebdev/alphavantagerb'
 gem 'stock_quote', '~> 3.0'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
