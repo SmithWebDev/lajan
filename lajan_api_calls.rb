@@ -30,3 +30,5 @@ client.stock(symbol: ).fundamental_data.cash_flow_statements["annualReports" or 
 
 # SECTOR DATA
 # =================================================================
+client.sector.output.keys
+["Meta Data", "Rank A: Real-Time Performance", "Rank B: 1 Day Performance", "Rank C: 5 Day Performance", "Rank D: 1 Month Performance", "Rank E: 3 Month Performance", "Rank F: Year-to-Date (YTD) Performance", "Rank G: 1 Year Performance", "Rank H: 3 Year Performance", "Rank I: 5 Year Performance", "Rank J: 10 Year Performance"]
