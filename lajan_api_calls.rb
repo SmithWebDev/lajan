@@ -1,5 +1,7 @@
+Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
 # Using Alphavantage API, these are some of the endpoints of interest
 # ----------------------------------------
+client.stock(symbol:).fundamental_data.overview.keys
 symbol = client.stock(symbol:).fundamental_data.overview['Symbol']
 cik = client.stock(symbol:).fundamental_data.overview['CIK']
 name = client.stock(symbol:).fundamental_data.overview['Name']
@@ -8,7 +10,16 @@ sector = client.stock(symbol:).fundamental_data.overview['Sector']
 industry = client.stock(symbol:).fundamental_data.overview['Industry']
 ebitda = client.stock(symbol:).fundamental_data.overview['EBITDA']
 dividend_yield = client.stock(symbol:).fundamental_data.overview['DividendYield']
-roe = client.stock(symbol:).fundamental_data.overview['ReturnonEquityTTM']
+roe = client.stock(symbol:).fundamental_data.overview['ReturnOnEquityTTM']
+
+client.stock(symbol: "F").fundamental_data.balance_sheets["annualReports"][0].keys
+client.stock(symbol: "F").fundamental_data.balance_sheets["quarterlyReports"][0].keys
+
+client.stock(symbol: "F").fundamental_data.income_statements["annualReports"][0].keys
+client.stock(symbol: "F").fundamental_data.income_statements["quarterlyReports"][0].keys
+
+client.stock(symbol: "F").fundamental_data.cash_flow_statements["annualReports"][0].keys
+client.stock(symbol: "F").fundamental_data.cash_flow_statements["quarterlyReports"][0].keys
 
 # definitions to add to tooltip
 # ----------------------------------------
