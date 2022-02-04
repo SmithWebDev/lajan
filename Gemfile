@@ -6,7 +6,6 @@ ruby '3.1.0'
 gem 'cssbundling-rails'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
-gem 'fakeweb'
 gem 'ffaker', '~> 2.18'
 gem 'hirb'
 gem 'jbuilder'
@@ -19,8 +18,6 @@ gem 'Smith_View_Tool'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
-gem 'vcr'
-gem 'vcr_cable'
 
 # Project Based Gems
 gem 'alphavantagerb', github: 'smithwebdev/alphavantagerb'
@@ -47,7 +44,10 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'fakeweb'
   gem 'rspec-rails'
+  gem 'vcr'
+  gem 'vcr_cable'
 end
 
 group :development do

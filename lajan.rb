@@ -76,6 +76,12 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 end
 
+# ----
+gem 'vcr' => group: :development, :test
+gem 'vcr_cable' => group: :development, :test
+gem 'fakeweb' => group: :development, :test
+
+
 
 
 # REMINDER
