@@ -1,8 +1,27 @@
 Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
+StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
 
 # definitions to add to tooltip
 # ----------------------------------------
 # ROE = Return on Equity (or ROE) is calculated as income divided by average shareholder equity (past 12 months, including reinvested earnings). The income number is listed on a company's Income Statement. Shareholder Equity (which is the difference between Total Assets and Total Liabilities) can be found on the Balance Sheet.
+# Common Stock = Shareholders have voting rights
+# Preferred Stock = Shareholders have no voting rights
+
+# Dividend definitions
+# ----------------------------------------
+# Ex-Dividend Date = The day on which all shares bought and sold no longer come attached with the right to be paid the most recently declared dividend. You must own a stock before the ex-dividend date in order to receive the next scheduled dividend. Selling the stock prior to this date, loses their right to the dividend. On and after this date the stock become 'ex dividend (without dividend)', owners of the stock will receive the dividend even if they now sell the stock.
+
+# Record Date = Shareholders who properly registered their ownership on or before the record date (or "date of record") will receive the dividend.
+
+# Payment Date = The day when the dividend checks will actually be mailed to the shareholders of a company/credited to a brokerage account.
+
+# Declaration Date = The day on which a company's board of directors announces its next dividend payment.
+
+# Dividend Yield = An easy way to compare the relative attractiveness of various dividend paying stocks. Dividend Yield is the relation between a stock's annual dividend payout and its current stock price. Depending on how much a stock price moves during the day, the yield is constantly changing as the stock price changes.
+# DividendYield is calculated using the annual yield
+# DividendYield = AnnualDividend/CurrentStockPrice
+
+#
 
 # Using Alphavantage API, these are some of the endpoints of interest
 # ----------------------------------------
@@ -32,3 +51,16 @@ client.stock(symbol: ).fundamental_data.cash_flow_statements["annualReports" or 
 # =================================================================
 client.sector.output.keys
 ["Meta Data", "Rank A: Real-Time Performance", "Rank B: 1 Day Performance", "Rank C: 5 Day Performance", "Rank D: 1 Month Performance", "Rank E: 3 Month Performance", "Rank F: Year-to-Date (YTD) Performance", "Rank G: 1 Year Performance", "Rank H: 3 Year Performance", "Rank I: 5 Year Performance", "Rank J: 10 Year Performance"]
+
+# Investing Strategy
+# =================================================================
+
+# "Dividend Capture" = an attempt to collect the dividend and immediately sell the stock.
+
+# Stock Tickers of Interest
+# =================================================================
+
+# Dividend Friendly Industries = REITs, MLPs, Tobacco, Telecommunications, Utilities
+
+# Monthly Paying Common Stocks (Does not include preferred not ETF/Exchange Traded Notes)
+%w[ADR, AGNC, ARR, AVAL, BBD, BRMK, CRT, DRETF, DREUF, EFC, EIFZF, EPR, GAIN, GLAD, GOOD, GROW, GWRS, HRZN, IPPLF, ITUB, LAND, LTC, MAIN, MTR, O, ORC, OXSQ, PBA, PBT, PFLT, PPRQF, PRT, PSEC, PVL, SBR, SCM, SJR, SJT, SLG, STAG, SUNS, SUUIF, TRSWF, WSR, EIC]

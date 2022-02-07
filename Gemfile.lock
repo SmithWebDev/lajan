@@ -6,6 +6,14 @@ GIT
       httparty (>= 0.15.6)
       humanize (>= 1.7.0)
 
+GIT
+  remote: https://github.com/smithwebdev/stock_quote.git
+  revision: 7d77288a0ed6553b7c2885f5287d65fff8b5e407
+  specs:
+    stock_quote (3.0.0)
+      json
+      rest-client (~> 2.0.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -297,9 +305,6 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.0.2)
       railties (>= 6.0.0)
-    stock_quote (3.0.0)
-      json
-      rest-client (~> 2.0.2)
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
@@ -360,7 +365,7 @@ DEPENDENCIES
   rspec-rails
   sprockets-rails
   stimulus-rails
-  stock_quote (~> 3.0)
+  stock_quote!
   turbo-rails
   tzinfo-data
   vcr
