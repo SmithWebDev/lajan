@@ -160,6 +160,8 @@ GEM
       railties (>= 5.0.0)
     ffaker (2.20.0)
     ffi (1.15.5)
+    font_awesome5_rails (0.9.0)
+      railties (>= 4.2)
     formatador (1.1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -367,6 +369,7 @@ DEPENDENCIES
   dotenv-rails (~> 2.7)
   factory_bot_rails
   ffaker (~> 2.18)
+  font_awesome5_rails (~> 0.9.0)
   groupdate (~> 6.0, >= 6.0.1)
   guard
   guard-bundler
