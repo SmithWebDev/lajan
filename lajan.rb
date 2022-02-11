@@ -79,7 +79,7 @@ end
 # ----
 gem 'vcr' => group: :development, :test
 gem 'vcr_cable' => group: :development, :test
-gem 'fakeweb' => group: :development, :test
+gem 'webmock' => group: :development, :test
 
 
 
