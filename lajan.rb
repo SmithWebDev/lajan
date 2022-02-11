@@ -81,8 +81,18 @@ gem 'vcr' => group: :development, :test
 gem 'vcr_cable' => group: :development, :test
 gem 'webmock' => group: :development, :test
 
+# ---- OPTION1
+npm i bootstrap-icons
+# app/assets/stylesheets/application.bootstrap.scss
+@import 'bootstrap-icons/font/bootstrap-icons';
 
+# config/initializers/assets/rb
+Rails.application.config.assets.paths << Rails.root.join('node_modules/bootstrap-icons/font')
 
+# ---- OPTION2 *tested works
+npm i --save @fortawesome/fontawesome-free
+# app/javascript/application.js
+import '@fortawesome/fontawesome-free/js/all'
 
 # REMINDER
 # brew services start redis
