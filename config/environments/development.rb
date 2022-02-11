@@ -72,5 +72,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   # Additional watch locations for Hotwire Reload
-  config.hotwire_livereload.listen_paths << Rails.root.join("app/assets/builds")
+  # config.hotwire_livereload.listen_paths << Rails.root.join("app/assets/builds")
+  # WebMock.allow_net_connect!
 end

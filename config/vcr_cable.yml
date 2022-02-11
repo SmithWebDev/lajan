@@ -1,7 +1,7 @@
-development:
-  hook_into: fakeweb
-  cassette_library_dir: development_cassettes
-  enable_erb: true
-  allow_playback_repeats: false
-  allow_http_connections_when_no_cassette: true
-  enable_vcr_cable: true
+# development:
+#   hook_into: WebMock
+#   cassette_library_dir: development_cassettes
+#   enable_erb: true
+#   allow_playback_repeats: false
+#   allow_http_connections_when_no_cassette: true
+#   enable_vcr_cable: true

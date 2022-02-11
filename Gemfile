@@ -44,17 +44,19 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'fakeweb'
   gem 'rspec-rails'
-  gem 'vcr'
-  gem 'vcr_cable'
+  # gem 'vcr'
+  # gem 'vcr_cable'
+  # gem 'webmock'
 end
 
 group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'hotwire-livereload'
+  gem 'guard'
+  gem 'guard-bundler', require: false
+  # gem 'hotwire-livereload'
   gem 'letter_opener'
   gem 'web-console'
 

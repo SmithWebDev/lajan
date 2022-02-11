@@ -23,7 +23,7 @@
 * Account Holdings: connects Accounts with Company data available
 * Company:          Actual companies listing
 * Price History:    Company historical Pricings
-* Dividend History: Company historical Dividend offerings
+* Dividend History: Company next and historical Dividend offerings, to include the declaration date, exdividend date, record date, and payment date
 
 #### TODOS
 * Authentication
@@ -40,3 +40,6 @@
   * Show limited Company Data on Account Dashboard
 * Calculate expected Monthly/ Annual Dividend Payout
 * Show Company Data on Company page
+
+
+
