@@ -1,5 +1,5 @@
-Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
-StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
+# Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
+# StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
 
 # definitions to add to tooltip
 # ----------------------------------------
