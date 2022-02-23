@@ -66,12 +66,13 @@ client.sector.output.keys
 # Dividend Friendly Industries = REITs, MLPs, Tobacco, Telecommunications, Utilities
 
 # Test Companies for project
-%w[AAPL O IRM ARR GROW GAIN LAND]
+%w[HD AAPL O IRM ARR GROW GAIN LAND]
 
 # Monthly Paying Common Stocks (Does not include preferred not ETF/Exchange Traded Notes)
 %w[ADR, AGNC, ARR, AVAL, BBD, BRMK, CRT, DRETF, DREUF, EFC, EIFZF, EPR, GAIN, GLAD, GOOD, GROW, GWRS, HRZN, IPPLF, ITUB, LAND, LTC, MAIN, MTR, O, ORC, OXSQ, PBA, PBT, PFLT, PPRQF, PRT, PSEC, PVL, SBR, SCM, SJR, SJT, SLG, STAG, SUNS, SUUIF, TRSWF, WSR, EIC],
 
 # Fetch_stock_info
+client.stock(symbol: symbol).
 
 client.stock(symbol: symbol).timeseries(outputsize: "full", adjusted: true, type: "weekly").output["Weekly Adjusted Time Series"].each do |week|
   weekly_date: week
@@ -82,7 +83,6 @@ client.stock(symbol: symbol).timeseries(outputsize: "full", adjusted: true, type
   adjusted_close: week["5. adjusted close"],
   volume: week["6. volume"]
 end
-
 
 client.stock(symbol: symbol).timeseries(outputsize: "full", adjusted: true, type: "monthly").output["Monthly Adjusted Time Series"].each do |month|
   monthly_date: month
