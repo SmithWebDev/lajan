@@ -66,7 +66,7 @@ client.sector.output.keys
 # Dividend Friendly Industries = REITs, MLPs, Tobacco, Telecommunications, Utilities
 
 # Test Companies for project
-%w[HD AAPL O IRM ARR GROW GAIN LAND]
+%w[HD AAPL O IRM ARR GROW GAIN LAND MMM MO OMC TROW UGI],
 
 # Monthly Paying Common Stocks (Does not include preferred not ETF/Exchange Traded Notes)
 %w[ADR, AGNC, ARR, AVAL, BBD, BRMK, CRT, DRETF, DREUF, EFC, EIFZF, EPR, GAIN, GLAD, GOOD, GROW, GWRS, HRZN, IPPLF, ITUB, LAND, LTC, MAIN, MTR, O, ORC, OXSQ, PBA, PBT, PFLT, PPRQF, PRT, PSEC, PVL, SBR, SCM, SJR, SJT, SLG, STAG, SUNS, SUUIF, TRSWF, WSR, EIC],
