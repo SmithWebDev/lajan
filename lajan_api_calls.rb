@@ -72,8 +72,6 @@ client.sector.output.keys
 %w[ADR, AGNC, ARR, AVAL, BBD, BRMK, CRT, DRETF, DREUF, EFC, EIFZF, EPR, GAIN, GLAD, GOOD, GROW, GWRS, HRZN, IPPLF, ITUB, LAND, LTC, MAIN, MTR, O, ORC, OXSQ, PBA, PBT, PFLT, PPRQF, PRT, PSEC, PVL, SBR, SCM, SJR, SJT, SLG, STAG, SUNS, SUUIF, TRSWF, WSR, EIC],
 
 # Fetch_stock_info
-client.stock(symbol: symbol).
-
 client.stock(symbol: symbol).timeseries(outputsize: "full", adjusted: true, type: "weekly").output["Weekly Adjusted Time Series"].each do |week|
   weekly_date: week
   open: week["1. open"],
@@ -93,3 +91,14 @@ client.stock(symbol: symbol).timeseries(outputsize: "full", adjusted: true, type
   adjusted_close: month["5. adjusted close"],
   volume: month["6. volume"]
 end
+
+client.stock(symbol: symbol).fundamental_data.overview.each do |data|
+  company_symbol: symbol,
+  name: data["Name"],
+  description: data["Description"],
+  cik: data["CIK"],
+  sector: data["Sector"],
+  Industry: data["Industry"]
+end
+
+
