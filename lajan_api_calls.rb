@@ -38,7 +38,7 @@ client.stock(symbol: ).timeseries(outputsize: "full", adjusted: true, type: "wee
 
 # FUNDAMENTAL DATA
 # =================================================================
-client.stock(symbol: ).fundamental_data.overview.keys
+client.stock(symbol: ).fundamental_data.overview.keys,
 ["Symbol", "AssetType", "Name", "Description", "CIK", "Exchange", "Currency", "Country", "Sector", "Industry", "Address", "FiscalYearEnd", "LatestQuarter", "MarketCapitalization", "EBITDA", "PERatio", "PEGRatio", "BookValue", "DividendPerShare", "DividendYield", "EPS", "RevenuePerShareTTM", "ProfitMargin", "OperatingMarginTTM", "ReturnOnAssetsTTM", "ReturnOnEquityTTM", "RevenueTTM", "GrossProfitTTM", "DilutedEPSTTM", "QuarterlyEarningsGrowthYOY", "QuarterlyRevenueGrowthYOY", "AnalystTargetPrice", "TrailingPE", "ForwardPE", "PriceToSalesRatioTTM", "PriceToBookRatio", "EVToRevenue", "EVToEBITDA", "Beta", "52WeekHigh", "52WeekLow", "50DayMovingAverage", "200DayMovingAverage", "SharesOutstanding", "DividendDate", "ExDividendDate"],
 
 client.stock(symbol: ).fundamental_data.balance_sheets["annualReports" or "quarterlyReports"][0].keys

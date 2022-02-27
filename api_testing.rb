@@ -16,3 +16,4 @@ end
 def dividend_next(symbol)
   StockQuote::Stock.batch('dividends', symbol, 'next')
 end
+
