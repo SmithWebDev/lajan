@@ -4,6 +4,7 @@ task fetch_stock_info: :environment do
   # API key access
   company = Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
   stock = StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
+  business = Polygonio::Rest::Client(Rails.application.credentials.dig(:polygonio, :key))
 
   list_of_companies = %w[HD AAPL O IRM ARR GROW GAIN LAND]
 
