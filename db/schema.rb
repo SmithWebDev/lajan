@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_28_040726) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_040726) do
     t.integer "cik"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dividend_histories", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "declared_date"
+    t.datetime "exdate"
+    t.string "frequency"
+    t.datetime "payment_date"
+    t.datetime "record_date"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_dividend_histories_on_company_id"
   end
 
   create_table "price_history_monthlies", force: :cascade do |t|
@@ -34,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_040726) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dividend_amount", null: false
     t.index ["company_id"], name: "index_price_history_monthlies_on_company_id"
   end
 
@@ -48,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_040726) do
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dividend_amount", null: false
     t.index ["company_id"], name: "index_price_history_weeklies_on_company_id"
   end
 
@@ -64,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_040726) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "dividend_histories", "companies"
   add_foreign_key "price_history_monthlies", "companies"
   add_foreign_key "price_history_weeklies", "companies"
 end
