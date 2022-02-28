@@ -11,16 +11,17 @@ task fetch_stock_info: :environment do
   list_of_companies.each do |company|
     # API call variables
     weekly = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                       type: 'weekly').output['Weekly Adjusted Time Series']
+                                                      type: 'weekly').output['Weekly Adjusted Time Series']
     monthly = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                        type: 'monthly').output['Monthly Adjusted Time Series']
-    business_data = client.stock(symbol: company).fundamental_data.overview
+                                                       type: 'monthly').output['Monthly Adjusted Time Series']
+    company_info = client.stock(symbol: company).fundamental_data.overview
+    dividend = StockQuote::Stock.batch('dividends', symbol, '5y')
 
     Company.find_or_create_by(
-      name: business_data['Name'],
-      symbol: business_data['Symbol'],
-      cik: business_data['CIK'],
-      description: business_data['Description']
+      name: company_info['Name'],
+      symbol: company_info['Symbol'],
+      cik: company_info['CIK'],
+      description: company_info['Description']
     )
 
     monthly.each do |month|
@@ -32,7 +33,8 @@ task fetch_stock_info: :environment do
         low: month['3. low'],
         close: month['4. close'],
         adjusted_close: month['5. adjusted close'],
-        volume: month['6. volume']
+        volume: month['6. volume'],
+        dividend_amount: month['7. dividend amount']
       )
     end
 
@@ -45,7 +47,20 @@ task fetch_stock_info: :environment do
         low: week['3. low'],
         close: week['4. close'],
         adjusted_close: week['5. adjusted close'],
-        volume: week['6. volume']
+        volume: week['6. volume'],
+        dividend_amount: week['7. dividend amount']
+      )
+    end
+
+    dividend.dividends.each do |div|
+      DividendHistory.find_or_create_by(
+        company_id: Company.find_by(symbol: company).id,
+        amount: div['amount'],
+        declared_date: div['declaredDate'],
+        exdate: div['exDate'],
+        frequency: div['frequency'],
+        payment_date: div['paymentDate'],
+        record_date: div['recordDate']
       )
     end
   end
