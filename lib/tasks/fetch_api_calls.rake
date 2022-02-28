@@ -10,12 +10,17 @@ task fetch_stock_info: :environment do
 
   list_of_companies.each do |c|
     # API call variables
-    weekly_timeseries = company.stock(symbol: c).timeseries(outputsize: 'full', adjusted: true,
-                                                            type: 'weekly').output['Weekly Adjusted Time Series']
-    monthly_timeseries = company.stock(symbol: c).timeseries(outputsize: 'full', adjusted: true,
-                                                             type: 'monthly').output['Monthly Adjusted Time Series']
+    # weekly_timeseries = company.stock(symbol: c).timeseries(outputsize: 'full', adjusted: true,
+    #                                                         type: 'weekly').output['Weekly Adjusted Time Series']
+    # monthly_timeseries = company.stock(symbol: c).timeseries(outputsize: 'full', adjusted: true,
+    #                                                          type: 'monthly').output['Monthly Adjusted Time Series']
     business_data = company.stock(symbol: c).fundamental_data.overview
 
-
+    Company.find_or_create_by(
+      name: business_data['Name'],
+      symbol: business_data['Symbol'],
+      cik: business_data['CIK'],
+      description: business_data['Description']
+    )
   end
 end
