@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'pages#home'
+  resources :company
+  root 'dashboard#index'
+  # root 'pages#home'
 end
