@@ -3,14 +3,14 @@
 # Table name: price_history_monthlies
 #
 #  id              :bigint           not null, primary key
-#  adjusted_close  :integer          not null
-#  close           :integer          not null
+#  adjusted_close  :float            not null
+#  close           :float            not null
 #  date            :datetime         not null
 #  dividend_amount :integer          not null
-#  high            :integer          not null
-#  low             :integer          not null
-#  open            :integer          not null
-#  volume          :integer          not null
+#  high            :float            not null
+#  low             :float            not null
+#  open            :float            not null
+#  volume          :bigint           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  company_id      :bigint           not null

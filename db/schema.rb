@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
   end
 
   create_table "dividend_histories", force: :cascade do |t|
-    t.integer "amount"
+    t.float "amount"
     t.datetime "declared_date"
     t.datetime "exdate"
     t.string "frequency"
@@ -37,12 +37,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
   end
 
   create_table "price_history_monthlies", force: :cascade do |t|
-    t.integer "open", null: false
-    t.integer "low", null: false
-    t.integer "high", null: false
-    t.integer "close", null: false
-    t.integer "adjusted_close", null: false
-    t.integer "volume", null: false
+    t.float "open", null: false
+    t.float "low", null: false
+    t.float "high", null: false
+    t.float "close", null: false
+    t.float "adjusted_close", null: false
+    t.bigint "volume", null: false
     t.datetime "date", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
@@ -52,12 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
   end
 
   create_table "price_history_weeklies", force: :cascade do |t|
-    t.integer "open", null: false
-    t.integer "high", null: false
-    t.integer "low", null: false
-    t.integer "close", null: false
-    t.integer "adjusted_close", null: false
-    t.integer "volume", null: false
+    t.float "open", null: false
+    t.float "high", null: false
+    t.float "low", null: false
+    t.float "close", null: false
+    t.float "adjusted_close", null: false
+    t.bigint "volume", null: false
     t.datetime "date", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false

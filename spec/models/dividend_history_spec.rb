@@ -3,7 +3,7 @@
 # Table name: dividend_histories
 #
 #  id            :bigint           not null, primary key
-#  amount        :integer
+#  amount        :float
 #  declared_date :datetime
 #  exdate        :datetime
 #  frequency     :string
