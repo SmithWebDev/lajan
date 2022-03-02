@@ -25,7 +25,7 @@ gem 'alphavantagerb', github: 'smithwebdev/alphavantagerb'
 gem 'apexcharts', '~> 0.1.11'
 gem 'chartkick', '~> 4.1', '>= 4.1.3'
 gem 'groupdate', '~> 6.0', '>= 6.0.1'
-gem 'polygonio', github: 'smithwebdev/polygonio-rb'
+# gem 'polygonio', github: 'smithwebdev/polygonio-rb'
 gem 'stock_quote', github: 'smithwebdev/stock_quote'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
