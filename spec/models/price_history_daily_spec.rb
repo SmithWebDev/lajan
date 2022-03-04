@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  close      :float
+#  date       :datetime
 #  high       :float
 #  low        :float
 #  open       :float

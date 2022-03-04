@@ -59,6 +59,19 @@ task fetch_api_calls: :environment do
     end
     puts "#{company_info['Name']} weekly price history added"
 
+    daily.each do |day|
+      PriceHistoryDaily.find_or_create_by(
+        company_id: Company.find_by(symbol: company).id,
+        open: day[1]['1. open'].to_f,
+        high: day[1]['2. high'].to_f,
+        low: day[1]['3. low'].to_f,
+        close: day[1]['4. close'].to_f,
+        volume: day[1]['5. volume'],
+        date: day[0]
+      )
+    end
+    puts "#{company_info['Name']} daily price history added"
+
     next_dividend.dividends.each do |div|
       DividendHistory.find_or_create_by(
         company_id: Company.find_by(symbol: company).id,
