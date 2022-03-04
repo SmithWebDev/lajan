@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_04_025214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_dividend_histories_on_company_id"
+  end
+
+  create_table "price_history_dailies", force: :cascade do |t|
+    t.float "open"
+    t.float "high"
+    t.float "low"
+    t.float "close"
+    t.bigint "volume"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_price_history_dailies_on_company_id"
   end
 
   create_table "price_history_monthlies", force: :cascade do |t|
@@ -80,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_28_094805) do
   end
 
   add_foreign_key "dividend_histories", "companies"
+  add_foreign_key "price_history_dailies", "companies"
   add_foreign_key "price_history_monthlies", "companies"
   add_foreign_key "price_history_weeklies", "companies"
 end
