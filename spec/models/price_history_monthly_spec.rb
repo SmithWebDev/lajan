@@ -6,7 +6,7 @@
 #  adjusted_close  :float            not null
 #  close           :float            not null
 #  date            :datetime         not null
-#  dividend_amount :integer          not null
+#  dividend_amount :float            not null
 #  high            :float            not null
 #  low             :float            not null
 #  open            :float            not null

@@ -7,7 +7,6 @@ task fetch_api_calls: :environment do
   # business = Polygonio::Rest::Client(Rails.application.credentials.dig(:polygonio, :key))
 
   list_of_companies = %w[BXMT MAIN INTC BRMK HD AAPL UGI MO MMM O IRM ARR GROW GAIN LAND]
-  # list_of_companies = ['BXMT']
 
   list_of_companies.each do |company|
     # API call variables

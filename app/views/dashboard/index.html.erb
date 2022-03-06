@@ -1,6 +1,46 @@
 <p>List of companies in database</p>
 <ul>
   <% @company.each do |company| %>
-  <li><%= company.name %></li>
+  <li><%# company.name %></li>
   <% end %>
 </ul>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Open</th>
+    <th>High</th>
+    <th>Low</th>
+    <th>Close</th>
+    <th>Volume</th>
+  </tr>
+  <tr>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>TICKER</th>
+    <th>SHARES</th>
+    <th>PRICE</th>
+    <th>CHANGE</th>
+    <th>AVERAGE COST</th>
+    <th>PROFIT/LOSS</th>
+    <th>DIVIDEND YIELD</th>
+    <th>YIELD ON COST</th>
+    <th>ANNUAL INCOME</th>
+    <th>misc</th>
+  </tr>
+  <tr>
+    <td><%# @company.symbol %><%# @company.name %></td>
+    <td>10</td>
+    <td>$3.00</td>
+    <td>$25.00</td>
+    <td>$15.00</td>
+    <td>.54%</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>

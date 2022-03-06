@@ -55,12 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_04_031732) do
     t.float "high", null: false
     t.float "close", null: false
     t.float "adjusted_close", null: false
+    t.float "dividend_amount", null: false
     t.bigint "volume", null: false
     t.datetime "date", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "dividend_amount", null: false
     t.index ["company_id"], name: "index_price_history_monthlies_on_company_id"
   end
 
@@ -70,12 +70,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_04_031732) do
     t.float "low", null: false
     t.float "close", null: false
     t.float "adjusted_close", null: false
+    t.float "dividend_amount", null: false
     t.bigint "volume", null: false
     t.datetime "date", null: false
     t.bigint "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "dividend_amount", null: false
     t.index ["company_id"], name: "index_price_history_weeklies_on_company_id"
   end
 
