@@ -17,30 +17,37 @@
   <tr>
   </tr>
 </table>
-
-<table>
-  <tr>
-    <th>TICKER</th>
-    <th>SHARES</th>
-    <th>PRICE</th>
-    <th>CHANGE</th>
-    <th>AVERAGE COST</th>
-    <th>PROFIT/LOSS</th>
-    <th>DIVIDEND YIELD</th>
-    <th>YIELD ON COST</th>
-    <th>ANNUAL INCOME</th>
-    <th>misc</th>
-  </tr>
-  <tr>
-    <td><%# @company.symbol %><%# @company.name %></td>
-    <td>10</td>
-    <td>$3.00</td>
-    <td>$25.00</td>
-    <td>$15.00</td>
-    <td>.54%</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+<br>
+<hr>
+<br>
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>TICKER</th>
+      <th scope='col'>SHARES</th>
+      <th scope='col'>PRICE</th>
+      <th scope='col'>CHANGE</th>
+      <th scope='col'>AVERAGE COST</th>
+      <th scope='col'>PROFIT/LOSS</th>
+      <th scope='col'>DIVIDEND YIELD</th>
+      <th scope='col'>YIELD ON COST</th>
+      <th scope='col'>ANNUAL INCOME</th>
+      <th scope='col'>misc</th>
+    </tr>
+  </thead>
+  <tbody class='table-striped'>
+    <tr>
+      <td><%# @company.symbol %><%# @company.name %></td>
+      <div class="dashboard-table">
+        <td>10</td>
+        <td>$3.00</td>
+        <td>$25.00</td>
+        <td>$15.00</td>
+        <td>.54%</td>
+        <td>0.75%</td>
+        <td>$15.00</td>
+        <td></td>
+      </div>
+    </tr>
+  </tbody>
 </table>
