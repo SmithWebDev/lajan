@@ -15,4 +15,6 @@ class Company < ApplicationRecord
   has_many :price_history_weeklies
   has_many :price_history_monthlies
   has_many :dividend_histories
+  has_many :account_holdings
+  has_many :accounts, through: :account_holdings
 end
