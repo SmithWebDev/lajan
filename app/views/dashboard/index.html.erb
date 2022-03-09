@@ -1,7 +1,7 @@
 <p>List of companies in database</p>
 <ul>
   <% @company.each do |company| %>
-  <li><%# company.name %></li>
+  <li><%= company.name %></li>
   <% end %>
 </ul>
 
@@ -20,6 +20,7 @@
 <br>
 <hr>
 <br>
+
 <table class='table'>
   <thead>
     <tr>
