@@ -17,7 +17,7 @@
 #  fk_rails_...  (users_id => users.id)
 #
 class Account < ApplicationRecord
-  belongs_to :users
+  belongs_to :user
   has_many :account_holdings
   has_many :companies, through: :account_holdings
 end

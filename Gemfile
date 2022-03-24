@@ -58,7 +58,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'guard'
   gem 'guard-bundler', require: false
-  # gem 'hotwire-livereload'
+  gem 'hotwire-livereload'
   gem 'letter_opener'
   gem 'web-console'
 
