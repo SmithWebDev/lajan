@@ -6,15 +6,11 @@
 #  account_name :string           default("default")
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  users_id     :bigint           not null
+#  user_id      :bigint
 #
 # Indexes
 #
-#  index_accounts_on_users_id  (users_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (users_id => users.id)
+#  index_accounts_on_user_id  (user_id)
 #
 require 'rails_helper'
 
