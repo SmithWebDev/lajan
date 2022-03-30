@@ -1,11 +1,11 @@
-<p>List of companies in database</p>
-<ul>
-  <% @company.each do |company| %>
-  <li><%= company.name %></li>
-  <% end %>
-</ul>
+<!-- <p>List of companies in database</p> -->
+<!-- <ul>
+  <%# @company.each do |company| %>
+  <li><%# company.name %></li>
+  <%# end %>
+</ul> -->
 
-<table>
+<!-- <table>
   <tr>
     <th>Date</th>
     <th>Open</th>
@@ -16,11 +16,12 @@
   </tr>
   <tr>
   </tr>
-</table>
-<br>
+</table> -->
 <hr>
 <br>
-<%= link_to "Add Account", new_account_path, class: 'btn btn-primary' %>
+<%# link_to "Add Account", new_account_path, class: 'btn btn-primary' %>
+<%= link_to "Add Account", new_account_path %>
+<%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary' %>
 <table class='table'>
   <thead>
     <tr>
@@ -38,6 +39,18 @@
   </thead>
   <tbody class='table-striped'>
     <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
       <td><%# @company.symbol %><%# @company.name %></td>
       <div class="dashboard-table">
         <td>10</td>
@@ -52,3 +65,13 @@
     </tr>
   </tbody>
 </table>
+
+<p>
+  <%= @company.first.symbol %>
+</p>
+<p>
+  <%= @company.first.name %>
+</p>
+<p>
+  <%= @company.first.description %>
+</p>

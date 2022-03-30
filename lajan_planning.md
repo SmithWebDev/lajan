@@ -42,4 +42,7 @@
 * Show Company Data on Company page
 
 
-
+* dashboard updates based on the account being viewed, also have a grand account dashboard
+* Add new account (needs parameters permitted)
+* Show contents of account in the dashboard
+* add new holdings to current account
