@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Account holdings</h1>
+
+<div id="account_holdings">
+  <% @account_holdings.each do |account_holding| %>
+    <%= render account_holding %>
+    <p>
+      <%= link_to "Show this account holding", account_holding %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New account holding", new_account_holding_path %>

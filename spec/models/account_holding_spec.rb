@@ -2,11 +2,13 @@
 #
 # Table name: account_holdings
 #
-#  id         :bigint           not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  account_id :bigint           not null
-#  company_id :bigint           not null
+#  id             :bigint           not null, primary key
+#  cost_per_share :float
+#  shares         :float
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  account_id     :bigint           not null
+#  company_id     :bigint           not null
 #
 # Indexes
 #

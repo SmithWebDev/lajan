@@ -1,0 +1,38 @@
+<%= form_with(model: account_holding) do |form| %>
+  <% if account_holding.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(account_holding.errors.count, "error") %> prohibited this account_holding from being saved:</h2>
+
+      <ul>
+        <% account_holding.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :account %>
+    <%= form.collection_select :account_id, current_user.accounts, :id, :account_name, class: 'form-select'  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :symbol %>
+    <%# form.text_field :symbol, class: 'form-control' %>
+    <%= form.collection_select :company_id, Company.all, :id, :symbol, prompt: true, class: 'form-select' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :shares %>
+    <%= form.text_field :shares, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cost_per_share %>
+    <%= form.text_field :cost_per_share, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.submit "Add Holding", class: "btn btn-primary my-3" %>
+  </di=>
+<% end %>
