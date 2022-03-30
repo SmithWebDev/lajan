@@ -11,7 +11,12 @@
     </div>
   <% end %>
 
+  <div class="form-group">
+    <%= form.label :account_name %>
+    <%= form.text_field :account_name, class: 'form-control' %>
+  </div>
+
   <div>
-    <%= form.submit %>
+    <%= form.submit "Add Account", class: "btn btn-primary my-3" %>
   </div>
 <% end %>
