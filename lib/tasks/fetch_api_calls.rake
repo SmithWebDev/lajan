@@ -10,12 +10,12 @@ task fetch_api_calls: :environment do
 
   list_of_companies.each do |company|
     # API call variables
+    company_info  = client.stock(symbol: company).fundamental_data.overview
     daily         = client.stock(symbol: company).timeseries(outputsize: 'full').output['Time Series (Daily)']
     weekly        = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
                                                              type: 'weekly').output['Weekly Adjusted Time Series']
     monthly       = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
                                                              type: 'monthly').output['Monthly Adjusted Time Series']
-    company_info  = client.stock(symbol: company).fundamental_data.overview
 
     past_dividend = StockQuote::Stock.batch('dividends', company, '5y')
     next_dividend = StockQuote::Stock.batch('dividends', company, 'next')
