@@ -38,18 +38,21 @@
     </tr>
   </thead>
   <tbody class='table-striped'>
+    <% @company.each do |company| %>
     <tr>
+      <!-- <td><%# link_to company.company_id.company.symbol, company_analysis_path(@company) %></td> -->
+      <td><%= company.symbol %></td>
+      <td><%= company.account_holdings.sum(:shares) %></td>
+      <td><%= company.price_history_dailies.last.close %></td>
       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><%= company.account_holdings.average(:cost_per_share) %></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
+    <% end %>
     <tr>
       <td><%# @company.symbol %><%# @company.name %></td>
       <div class="dashboard-table">
@@ -66,12 +69,4 @@
   </tbody>
 </table>
 
-<p>
-  <%= @company.first.symbol %>
-</p>
-<p>
-  <%= @company.first.name %>
-</p>
-<p>
-  <%= @company.first.description %>
-</p>
+<%= @company.first.price_history_dailies.first.date %>
