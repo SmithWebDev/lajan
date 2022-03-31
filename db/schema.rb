@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_29_220106) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_220106) do
     t.integer "cik"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "exchange"
+    t.string "sector"
+    t.string "industry"
+    t.date "fiscalyearend"
+    t.date "latestquarter"
+    t.bigint "ebitda"
+    t.float "peratio"
+    t.float "dividend_per_share"
+    t.float "dividend_yield"
+    t.float "eps"
+    t.float "year_high"
+    t.float "year_low"
+    t.bigint "shares_outstanding"
   end
 
   create_table "dividend_histories", force: :cascade do |t|

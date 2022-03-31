@@ -10,7 +10,7 @@ task fetch_api_calls: :environment do
 
   list_of_companies.each do |company|
     # API call variables
-    company_info  = client.stock(symbol: company).fundamental_data.overview
+    company_info = client.stock(symbol: company).fundamental_data.overview
     daily         = client.stock(symbol: company).timeseries(outputsize: 'full').output['Time Series (Daily)']
     weekly        = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
                                                              type: 'weekly').output['Weekly Adjusted Time Series']
@@ -24,7 +24,20 @@ task fetch_api_calls: :environment do
       name: company_info['Name'],
       symbol: company_info['Symbol'],
       cik: company_info['CIK'],
-      description: company_info['Description']
+      description: company_info['Description'],
+      exchange: company_info['Exchange'],
+      sector: company_info['Sector'],
+      industry: company_info['Industry'],
+      fiscalyearend: company_info['FiscalYearEnd'],
+      latestquarter: company_info['LatestQuarter'],
+      ebitda: company_info['EBITDA'],
+      peratio: company_info['PERatio'],
+      dividend_per_share: company_info['DividendPerShare'],
+      dividend_yield: company_info['DividendYield'],
+      eps: company_info['EPS'],
+      year_high: company_info['52WeekHigh'],
+      year_low: company_info['52WeekLow'],
+      shares_outstanding: company_info['SharesOutstanding']
     )
     puts "#{company_info['Name']} added"
 
