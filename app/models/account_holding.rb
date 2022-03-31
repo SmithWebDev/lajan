@@ -21,6 +21,9 @@
 #  fk_rails_...  (company_id => companies.id)
 #
 class AccountHolding < ApplicationRecord
-  has_many :companies
+  belongs_to :company
   belongs_to :account
+
+  def total_shares_owned
+  end
 end
