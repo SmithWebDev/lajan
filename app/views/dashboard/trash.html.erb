@@ -1,72 +1,59 @@
 <!-- <p>List of companies in database</p> -->
 <!-- <ul>
   <%# @company.each do |company| %>
-  <li><%# company.name %></li>
-  <%# end %>
-</ul> -->
+    <li><%# company.name %></li>
+    <%# end %>
+    </ul> -->
 
-<!-- <table>
-  <tr>
-    <th>Date</th>
-    <th>Open</th>
-    <th>High</th>
-    <th>Low</th>
-    <th>Close</th>
-    <th>Volume</th>
-  </tr>
-  <tr>
-  </tr>
-</table> -->
-<hr>
-<br>
-<%# link_to "Add Account", new_account_path, class: 'btn btn-primary' %>
-<%= link_to "Add Account", new_account_path %>
-<%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary' %>
-<table class='table'>
-  <thead>
-    <tr>
-      <th scope='col'>TICKER</th>
-      <th scope='col'>SHARES</th>
-      <th scope='col'>PRICE</th>
-      <th scope='col'>CHANGE</th>
-      <th scope='col'>AVERAGE COST</th>
-      <th scope='col'>PROFIT/LOSS</th>
-      <th scope='col'>DIVIDEND YIELD</th>
-      <th scope='col'>YIELD ON COST</th>
-      <th scope='col'>ANNUAL INCOME</th>
-      <th scope='col'>misc</th>
-    </tr>
-  </thead>
-  <tbody class='table-striped'>
-    <% @company.each do |company| %>
-    <tr>
-      <!-- <td><%# link_to company.company_id.company.symbol, company_analysis_path(@company) %></td> -->
-      <td><%= company.symbol %></td>
-      <td><%= company.account_holdings.sum(:shares) %></td>
-      <td><%= company.price_history_dailies.last.close %></td>
-      <td></td>
-      <td><%= company.account_holdings.average(:cost_per_share) %></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <% end %>
-    <tr>
-      <td><%# @company.symbol %><%# @company.name %></td>
-      <div class="dashboard-table">
-        <td>10</td>
-        <td>$3.00</td>
-        <td>$25.00</td>
-        <td>$15.00</td>
-        <td>.54%</td>
-        <td>0.75%</td>
-        <td>$15.00</td>
-        <td></td>
-      </div>
-    </tr>
-  </tbody>
-</table>
+    <!-- <table>
+      <tr>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      </tr>
+      <tr>
+      </tr>
+      </table> -->
+      <hr>
+      <br>
+      <%# link_to "Add Account", new_account_path, class: 'btn btn-primary' %>
+      <%= link_to "Add Account", new_account_path %>
+      <%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary' %>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th scope='col'>TICKER</th>
+            <th scope='col'>SHARES</th>
+            <th scope='col'>PRICE</th>
+            <th scope='col'>CHANGE</th>
+            <th scope='col'>AVERAGE COST</th>
+            <th scope='col'>PROFIT/LOSS</th>
+            <th scope='col'>DIVIDEND YIELD</th>
+            <th scope='col'>YIELD ON COST</th>
+            <th scope='col'>ANNUAL INCOME</th>
+            <th scope='col'>misc</th>
+          </tr>
+        </thead>
+        <tbody class='table-striped'>
+          <% @company.each do |company| %>
+            <tr>
+              <!-- <td><%# link_to company.company_id.company.symbol, company_analysis_path(@company) %></td> -->
+              <td><%= company.symbol %></td>
+              <td><%= company.account_holdings.sum(:shares) %></td>
+              <td><%= company.price_history_dailies.last.close %></td>
+              <td></td>
+              <td><%= company.account_holdings.average(:cost_per_share) %></td>
+              <td></td>
+              <td><%= company.dividend_yield %></td>
+              <td></td>
+              <td><%= company.dividend_per_share %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<%= @company.first.price_history_dailies.first.date %>
+      <%= @company.first.price_history_dailies.first.date %>
