@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
   end
 
   create_table "accounts", force: :cascade do |t|
-    t.string "account_name", default: "default"
+    t.string "account_name", default: "Default Portfolio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -36,13 +36,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
   create_table "companies", force: :cascade do |t|
     t.string "symbol"
     t.string "name"
-    t.text "description"
     t.integer "cik"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text "description"
     t.string "exchange"
     t.string "sector"
     t.string "industry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "company_infos", force: :cascade do |t|
     t.date "fiscalyearend"
     t.date "latestquarter"
     t.bigint "ebitda"
@@ -53,6 +56,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
     t.float "year_high"
     t.float "year_low"
     t.bigint "shares_outstanding"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_infos_on_company_id"
   end
 
   create_table "dividend_histories", force: :cascade do |t|
@@ -127,6 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_31_162642) do
 
   add_foreign_key "account_holdings", "accounts"
   add_foreign_key "account_holdings", "companies"
+  add_foreign_key "company_infos", "companies"
   add_foreign_key "dividend_histories", "companies"
   add_foreign_key "price_history_dailies", "companies"
   add_foreign_key "price_history_monthlies", "companies"
