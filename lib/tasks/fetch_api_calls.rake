@@ -27,9 +27,10 @@ task fetch_api_calls: :environment do
       description: company_info['Description'],
       exchange: company_info['Exchange'],
       sector: company_info['Sector'],
-      industry: company_info['Industry'],
+      industry: company_info['Industry']
     )
     CompanyInfo.find_or_create_by(
+      company_id: Company.find_by(symbol: company).id,
       fiscalyearend: company_info['FiscalYearEnd'],
       latestquarter: company_info['LatestQuarter'],
       ebitda: company_info['EBITDA'],
