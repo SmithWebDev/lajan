@@ -20,4 +20,5 @@ class Company < ApplicationRecord
   has_many :dividend_histories
   has_many :account_holdings
   has_many :accounts, through: :account_holdings
+  has_many :company_infos
 end
