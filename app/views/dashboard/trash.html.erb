@@ -42,9 +42,9 @@
             <td></td>
             <td><%= company.account_holdings.average(:cost_per_share) %></td>
             <td></td>
-            <td><%= company.company_infos.dividend_yield %></td>
+            <td><%# company.company_infos.dividend_yield %></td>
             <td></td>
-            <td><%= company.company_infos.dividend_per_share %></td>
+            <td><%# @companyinfo.dividend_per_share %></td>
             <td></td>
           </tr>
         <% end %>
