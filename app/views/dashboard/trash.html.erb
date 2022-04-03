@@ -6,7 +6,7 @@
       <% else %>
         <li><%= link_to "All Portfolios", root_path %></li>
         <% @accounts.each do |account| %>
-          <li><%= link_to account.account_name, root_path %></li>
+          <li><%= link_to account.account_name, account_path(account) %></li>
         <% end %>
         <li><%= link_to "Add Account", new_account_path %></li>
         <div class="account_holding">
@@ -34,19 +34,21 @@
         </tr>
       </thead>
       <tbody class="table-striped">
-        <% @account.companies.uniq.each do |company| %>
-          <tr>
-            <td><%= company.symbol %></td>
-            <td><%= company.account_holdings.sum(:shares) %></td>
-            <td><%= company.price_history_dailies.last.close %></td>
-            <td></td>
-            <td><%= company.account_holdings.average(:cost_per_share) %></td>
-            <td></td>
-            <td><%# company.company_infos.dividend_yield %></td>
-            <td></td>
-            <td><%# @companyinfo.dividend_per_share %></td>
-            <td></td>
-          </tr>
+        <% @accounts.each do |account| %>
+          <% account.companies.uniq.each do |company| %>
+            <tr>
+              <td><%= company.symbol %></td>
+              <td><%= company.account_holdings.sum(:shares) %></td>
+              <td><%= company.price_history_dailies.last.close %></td>
+              <td></td>
+              <td><%= company.account_holdings.average(:cost_per_share).round(2) %></td>
+              <td></td>
+              <td><%= company.company_infos.last.dividend_yield %></td>
+              <td></td>
+              <td><%= company.company_infos.last.dividend_per_share %></td>
+              <td></td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
