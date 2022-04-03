@@ -1,5 +1,5 @@
 class AccountHoldingsController < ApplicationController
-  before_action :set_account_holding, only: %i[ show edit update destroy ]
+  before_action :set_account_holding, only: %i[show edit update destroy]
 
   # GET /account_holdings or /account_holdings.json
   def index
@@ -7,8 +7,7 @@ class AccountHoldingsController < ApplicationController
   end
 
   # GET /account_holdings/1 or /account_holdings/1.json
-  def show
-  end
+  def show; end
 
   # GET /account_holdings/new
   def new
@@ -18,8 +17,7 @@ class AccountHoldingsController < ApplicationController
   end
 
   # GET /account_holdings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /account_holdings or /account_holdings.json
   def create
@@ -27,8 +25,7 @@ class AccountHoldingsController < ApplicationController
 
     respond_to do |format|
       if @account_holding.save
-        # format.html { redirect_to account_holding_url(@account_holding), notice: "Account holding was successfully created." }
-        format.html { redirect_to root_path, notice: "Account holding was successfully created." }
+        format.html { redirect_to root_path, notice: 'Account holding was successfully created.' }
         format.json { render :show, status: :created, location: @account_holding }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +38,9 @@ class AccountHoldingsController < ApplicationController
   def update
     respond_to do |format|
       if @account_holding.update(account_holding_params)
-        format.html { redirect_to account_holding_url(@account_holding), notice: "Account holding was successfully updated." }
+        format.html do
+          redirect_to account_holding_url(@account_holding), notice: 'Account holding was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @account_holding }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,19 +54,20 @@ class AccountHoldingsController < ApplicationController
     @account_holding.destroy
 
     respond_to do |format|
-      format.html { redirect_to account_holdings_url, notice: "Account holding was successfully destroyed." }
+      format.html { redirect_to account_holdings_url, notice: 'Account holding was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account_holding
-      @account_holding = AccountHolding.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def account_holding_params
-      params.require(:account_holding).permit(:company_id, :account_id, :shares, :cost_per_share)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account_holding
+    @account_holding = AccountHolding.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def account_holding_params
+    params.require(:account_holding).permit(:company_id, :account_id, :shares, :cost_per_share)
+  end
 end
