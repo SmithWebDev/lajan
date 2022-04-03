@@ -5,7 +5,7 @@
         <li><%= link_to "Add Account", new_account_path %></li>
       <% else %>
         <li><%= link_to "All Portfolios", root_path %></li>
-        <% @account.each do |account| %>
+        <% @accounts.each do |account| %>
           <li><%= link_to account.account_name, root_path %></li>
         <% end %>
         <li><%= link_to "Add Account", new_account_path %></li>
@@ -15,40 +15,41 @@
       </ul>
     <% end %>
   </div>
-<% end %>
 
-<table class='table'>
-  <thead>
-  <tr>
-  <th scope='col'>TICKER</th>
-  <th scope='col'>SHARES</th>
-  <th scope='col'>PRICE</th>
-  <th scope='col'>CHANGE</th>
-  <th scope='col'>AVERAGE COST</th>
-  <th scope='col'>PROFIT/LOSS</th>
-  <th scope='col'>DIVIDEND YIELD</th>
-  <th scope='col'>YIELD ON COST</th>
-  <th scope='col'>ANNUAL INCOME</th>
-  <th scope='col'>misc</th>
-  </tr>
-  </thead>
-  <tbody class='table-striped'>
-  <%# @company.account_holdings.each do |company| %>
-    <%#@company.each do |company| %>
-      <tr>
-      <td><%# link_to company.symbol, company_analysis_path %></td>
-      <td><%# company.symbol %></td>
-      <td><%# company.account_holdings.sum(:shares) %></td>
-      <td><%# company.price_history_dailies.last.close %></td>
-      <td></td>
-      <td><%# company.account_holdings.average(:cost_per_share) %></td>
-      <td></td>
-      <td><%# company.dividend_yield %></td>
-      <td></td>
-      <td><%# company.dividend_per_share %></td>
-      <td></td>
-      </tr>
-      <%#end %>
+  <% if current_user.accounts.empty? %>
+    <p>Please add your first account holding</p>
+  <% else %>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>TICKER</th>
+          <th scope='col'>SHARES</th>
+          <th scope='col'>PRICE</th>
+          <th scope='col'>CHANGE</th>
+          <th scope='col'>AVERAGE COST</th>
+          <th scope='col'>PROFIT/LOSS</th>
+          <th scope='col'>DIVIDEND YIELD</th>
+          <th scope='col'>YIELD ON COST</th>
+          <th scope='col'>ANNUAL INCOME</th>
+          <th scope='col'>misc</th>
+        </tr>
+      </thead>
+      <tbody class="table-striped">
+        <% @account.companies.uniq.each do |company| %>
+          <tr>
+            <td><%= company.symbol %></td>
+            <td><%= company.account_holdings.sum(:shares) %></td>
+            <td><%= company.price_history_dailies.last.close %></td>
+            <td></td>
+            <td><%= company.account_holdings.average(:cost_per_share) %></td>
+            <td></td>
+            <td><%= company.company_infos.dividend_yield %></td>
+            <td></td>
+            <td><%= company.company_infos.dividend_per_share %></td>
+            <td></td>
+          </tr>
+        <% end %>
       </tbody>
-      </table>
-      <%#end %>
+    </table>
+  <% end %>
+<% end %>

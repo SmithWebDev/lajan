@@ -7,7 +7,8 @@ class DashboardController < ApplicationController
   end
 
   def trash
-    @account = Account.all
+    @accounts = Account.all
+    @account = Account.find_by(params[:user_id])
     @company = Company.all
     @accountholding = AccountHolding.all
   end
