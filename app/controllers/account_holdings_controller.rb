@@ -27,7 +27,8 @@ class AccountHoldingsController < ApplicationController
 
     respond_to do |format|
       if @account_holding.save
-        format.html { redirect_to account_holding_url(@account_holding), notice: "Account holding was successfully created." }
+        # format.html { redirect_to account_holding_url(@account_holding), notice: "Account holding was successfully created." }
+        format.html { redirect_to root_path, notice: "Account holding was successfully created." }
         format.json { render :show, status: :created, location: @account_holding }
       else
         format.html { render :new, status: :unprocessable_entity }
