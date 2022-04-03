@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'user/profile'
+  get 'user/accounts'
+  get 'user/connections'
   resources :account_holdings
   resources :accounts
   devise_for :users

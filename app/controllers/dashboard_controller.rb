@@ -11,5 +11,6 @@ class DashboardController < ApplicationController
     @account = Account.find_by(params[:user_id])
     @company = Company.all
     @accountholding = AccountHolding.all
+    @companyinfo = CompanyInfo.find_by(params[:company_id])
   end
 end
