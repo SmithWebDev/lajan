@@ -14,6 +14,6 @@
 #
 class Account < ApplicationRecord
   belongs_to :user
-  has_many :account_holdings
+  has_many :account_holdings, dependent: :destroy
   has_many :companies, through: :account_holdings
 end
