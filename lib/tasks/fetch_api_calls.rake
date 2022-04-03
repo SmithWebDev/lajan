@@ -20,7 +20,7 @@ task fetch_api_calls: :environment do
     past_dividend = StockQuote::Stock.batch('dividends', company, '5y')
     next_dividend = StockQuote::Stock.batch('dividends', company, 'next')
 
-    Company.find_or_create_by(
+    c = Company.find_or_create_by(
       name: company_info['Name'],
       symbol: company_info['Symbol'],
       cik: company_info['CIK'],
@@ -30,7 +30,7 @@ task fetch_api_calls: :environment do
       industry: company_info['Industry']
     )
     CompanyInfo.find_or_create_by(
-      company_id: Company.find_by(symbol: company).id,
+      company_id: c.id,
       fiscalyearend: company_info['FiscalYearEnd'],
       latestquarter: company_info['LatestQuarter'],
       ebitda: company_info['EBITDA'],
@@ -46,7 +46,7 @@ task fetch_api_calls: :environment do
 
     monthly.each do |month|
       PriceHistoryMonthly.find_or_create_by(
-        company_id: Company.find_by(symbol: company).id,
+        company_id: c.id,
         open: month[1]['1. open'].to_f,
         high: month[1]['2. high'].to_f,
         low: month[1]['3. low'].to_f,
@@ -61,7 +61,7 @@ task fetch_api_calls: :environment do
 
     weekly.each do |week|
       PriceHistoryWeekly.find_or_create_by(
-        company_id: Company.find_by(symbol: company).id,
+        company_id: c.id,
         open: week[1]['1. open'].to_f,
         high: week[1]['2. high'].to_f,
         low: week[1]['3. low'].to_f,
@@ -76,7 +76,7 @@ task fetch_api_calls: :environment do
 
     daily.each do |day|
       PriceHistoryDaily.find_or_create_by(
-        company_id: Company.find_by(symbol: company).id,
+        company_id: c.id,
         open: day[1]['1. open'].to_f,
         high: day[1]['2. high'].to_f,
         low: day[1]['3. low'].to_f,
@@ -89,7 +89,7 @@ task fetch_api_calls: :environment do
 
     next_dividend.dividends.each do |div|
       DividendHistory.find_or_create_by(
-        company_id: Company.find_by(symbol: company).id,
+        company_id: c.id,
         amount: div['amount'],
         declared_date: div['declaredDate'],
         exdate: div['exDate'],
@@ -102,7 +102,7 @@ task fetch_api_calls: :environment do
 
     past_dividend.dividends.each do |div|
       DividendHistory.find_or_create_by(
-        company_id: Company.find_by(symbol: company).id,
+        company_id: c.id,
         amount: div['amount'],
         declared_date: div['declaredDate'],
         exdate: div['exDate'],
