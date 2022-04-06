@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_06_024042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -118,6 +118,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
     t.index ["company_id"], name: "index_price_history_weeklies_on_company_id"
   end
 
+  create_table "trashes", force: :cascade do |t|
+    t.date "fiscalyearend"
+    t.date "latestquarter"
+    t.float "dividend_per_share"
+    t.float "dividend_yield"
+    t.float "eps"
+    t.float "year_high"
+    t.float "year_low"
+    t.bigint "company_id", null: false
+    t.float "ebitda"
+    t.string "shares_outstanding"
+    t.float "peratio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_trashes_on_company_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -139,4 +156,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
   add_foreign_key "price_history_dailies", "companies"
   add_foreign_key "price_history_monthlies", "companies"
   add_foreign_key "price_history_weeklies", "companies"
+  add_foreign_key "trashes", "companies"
 end

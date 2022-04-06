@@ -11,14 +11,13 @@ task fetch_api_calls: :environment do
   list_of_companies.each do |company|
     # API call variables
     company_info = client.stock(symbol: company).fundamental_data.overview
-    daily         = client.stock(symbol: company).timeseries(outputsize: 'full').output['Time Series (Daily)']
-    weekly        = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                             type: 'weekly').output['Weekly Adjusted Time Series']
-    monthly       = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                             type: 'monthly').output['Monthly Adjusted Time Series']
-
-    past_dividend = StockQuote::Stock.batch('dividends', company, '5y')
-    next_dividend = StockQuote::Stock.batch('dividends', company, 'next')
+    # daily         = client.stock(symbol: company).timeseries(outputsize: 'full').output['Time Series (Daily)']
+    # weekly        = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
+    #                                                          type: 'weekly').output['Weekly Adjusted Time Series']
+    # monthly       = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
+    #                                                          type: 'monthly').output['Monthly Adjusted Time Series']
+    # past_dividend = StockQuote::Stock.batch('dividends', company, '5y')
+    # next_dividend = StockQuote::Stock.batch('dividends', company, 'next')
 
     c = Company.find_or_create_by(
       name: company_info['Name'],
@@ -29,90 +28,106 @@ task fetch_api_calls: :environment do
       sector: company_info['Sector'],
       industry: company_info['Industry']
     )
-    CompanyInfo.find_or_create_by(
-      company_id: c.id,
-      fiscalyearend: company_info['FiscalYearEnd'],
-      latestquarter: company_info['LatestQuarter'],
-      ebitda: company_info['EBITDA'],
-      peratio: company_info['PERatio'],
-      dividend_per_share: company_info['DividendPerShare'],
-      dividend_yield: company_info['DividendYield'],
-      eps: company_info['EPS'],
-      year_high: company_info['52WeekHigh'],
-      year_low: company_info['52WeekLow'],
-      shares_outstanding: company_info['SharesOutstanding']
-    )
+    Trash.find_or_create_by(c.id && latestquarter == company_info['LatestQuarter']) do |trash|
+      trash.company_id = c.id
+                         trash.fiscalyearend = company_info['FiscalYearEnd']
+                         trash.latestquarter = company_info['LatestQuarter']
+                         trash.ebitda = company_info['EBITDA']
+                         trash.peratio = company_info['PERatio']
+                         trash.dividend_per_share = company_info['DividendPerShare']
+                         trash.dividend_yield = company_info['DividendYield']
+                         trash.eps = company_info['EPS']
+                         trash.year_high = company_info['52WeekHigh']
+                         trash.year_low = company_info['52WeekLow']
+                         trash.shares_outstanding = company_info['SharesOutstanding']
+    end
     puts "#{company_info['Name']} added"
 
-    monthly.each do |month|
-      PriceHistoryMonthly.find_or_create_by(
-        company_id: c.id,
-        open: month[1]['1. open'].to_f,
-        high: month[1]['2. high'].to_f,
-        low: month[1]['3. low'].to_f,
-        close: month[1]['4. close'].to_f,
-        adjusted_close: month[1]['5. adjusted close'].to_f,
-        volume: month[1]['6. volume'],
-        dividend_amount: month[1]['7. dividend amount'].to_f,
-        date: month[0]
-      )
-    end
-    puts "#{company_info['Name']} monthly price history added"
+    #   CompanyInfo.find_or_create_by(
+    #     company_id: c.id,
+    #     fiscalyearend: company_info['FiscalYearEnd'],
+    #     latestquarter: company_info['LatestQuarter'],
+    #     ebitda: company_info['EBITDA'],
+    #     peratio: company_info['PERatio'],
+    #     dividend_per_share: company_info['DividendPerShare'],
+    #     dividend_yield: company_info['DividendYield'],
+    #     eps: company_info['EPS'],
+    #     year_high: company_info['52WeekHigh'],
+    #     year_low: company_info['52WeekLow'],
+    #     shares_outstanding: company_info['SharesOutstanding']
+    #   )
+    #   puts "#{company_info['Name']} added"
 
-    weekly.each do |week|
-      PriceHistoryWeekly.find_or_create_by(
-        company_id: c.id,
-        open: week[1]['1. open'].to_f,
-        high: week[1]['2. high'].to_f,
-        low: week[1]['3. low'].to_f,
-        close: week[1]['4. close'].to_f,
-        adjusted_close: week[1]['5. adjusted close'].to_f,
-        volume: week[1]['6. volume'],
-        dividend_amount: week[1]['7. dividend amount'].to_f,
-        date: week[0]
-      )
-    end
-    puts "#{company_info['Name']} weekly price history added"
+    #   monthly.each do |month|
+    #     PriceHistoryMonthly.find_or_create_by(
+    #       company_id: c.id,
+    #       open: month[1]['1. open'].to_f,
+    #       high: month[1]['2. high'].to_f,
+    #       low: month[1]['3. low'].to_f,
+    #       close: month[1]['4. close'].to_f,
+    #       adjusted_close: month[1]['5. adjusted close'].to_f,
+    #       volume: month[1]['6. volume'],
+    #       dividend_amount: month[1]['7. dividend amount'].to_f,
+    #       date: month[0]
+    #     )
+    #   end
+    #   puts "#{company_info['Name']} monthly price history added"
 
-    daily.each do |day|
-      PriceHistoryDaily.find_or_create_by(
-        company_id: c.id,
-        open: day[1]['1. open'].to_f,
-        high: day[1]['2. high'].to_f,
-        low: day[1]['3. low'].to_f,
-        close: day[1]['4. close'].to_f,
-        volume: day[1]['5. volume'],
-        date: day[0]
-      )
-    end
-    puts "#{company_info['Name']} daily price history added"
+    #   weekly.each do |week|
+    #     PriceHistoryWeekly.find_or_create_by(
+    #       company_id: c.id,
+    #       open: week[1]['1. open'].to_f,
+    #       high: week[1]['2. high'].to_f,
+    #       low: week[1]['3. low'].to_f,
+    #       close: week[1]['4. close'].to_f,
+    #       adjusted_close: week[1]['5. adjusted close'].to_f,
+    #       volume: week[1]['6. volume'],
+    #       dividend_amount: week[1]['7. dividend amount'].to_f,
+    #       date: week[0]
+    #     )
+    #   end
+    #   puts "#{company_info['Name']} weekly price history added"
 
-    next_dividend.dividends.each do |div|
-      DividendHistory.find_or_create_by(
-        company_id: c.id,
-        amount: div['amount'],
-        declared_date: div['declaredDate'],
-        exdate: div['exDate'],
-        frequency: div['frequency'],
-        payment_date: div['paymentDate'],
-        record_date: div['recordDate']
-      )
-    end
-    puts "#{company_info['Name']} next dividend added"
+    #   daily.each do |day|
+    #     PriceHistoryDaily.find_or_create_by(
+    #       company_id: c.id,
+    #       open: day[1]['1. open'].to_f,
+    #       high: day[1]['2. high'].to_f,
+    #       low: day[1]['3. low'].to_f,
+    #       close: day[1]['4. close'].to_f,
+    #       volume: day[1]['5. volume'],
+    #       date: day[0]
+    #     )
+    #   end
+    #   puts "#{company_info['Name']} daily price history added"
 
-    past_dividend.dividends.each do |div|
-      DividendHistory.find_or_create_by(
-        company_id: c.id,
-        amount: div['amount'],
-        declared_date: div['declaredDate'],
-        exdate: div['exDate'],
-        frequency: div['frequency'],
-        payment_date: div['paymentDate'],
-        record_date: div['recordDate']
-      )
-    end
-    puts "#{company_info['Name']} past dividend history added"
+    #   next_dividend.dividends.each do |div|
+    #     DividendHistory.find_or_create_by(
+    #       company_id: c.id,
+    #       amount: div['amount'],
+    #       declared_date: div['declaredDate'],
+    #       exdate: div['exDate'],
+    #       frequency: div['frequency'],
+    #       payment_date: div['paymentDate'],
+    #       record_date: div['recordDate']
+    #     )
+    #   end
+    #   puts "#{company_info['Name']} next dividend added"
 
-    sleep 60
+    #   past_dividend.dividends.each do |div|
+    #     DividendHistory.find_or_create_by(
+    #       company_id: c.id,
+    #       amount: div['amount'],
+    #       declared_date: div['declaredDate'],
+    #       exdate: div['exDate'],
+    #       frequency: div['frequency'],
+    #       payment_date: div['paymentDate'],
+    #       record_date: div['recordDate']
+    #     )
+    #   end
+    #   puts "#{company_info['Name']} past dividend history added"
+
+    #   sleep 60
+    sleep 10
   end
 end
