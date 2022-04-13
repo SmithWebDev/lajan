@@ -29,7 +29,7 @@ task fetch_api_calls: :environment do
       sector: company_info['Sector'],
       industry: company_info['Industry']
     )
-    CompanyInfo.find_or_create_by(
+    CompanyInfo.create_with(
       company_id: c.id,
       fiscalyearend: company_info['FiscalYearEnd'],
       latestquarter: company_info['LatestQuarter'],
@@ -41,7 +41,7 @@ task fetch_api_calls: :environment do
       year_high: company_info['52WeekHigh'],
       year_low: company_info['52WeekLow'],
       shares_outstanding: company_info['SharesOutstanding']
-    )
+    ).find_or_create_by(company_id: c.id, latestquarter: company_info['LatestQuarter'])
     puts "#{company_info['Name']} added"
 
     monthly.each do |month|
