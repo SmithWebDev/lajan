@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   resources :accounts
   devise_for :users
   resources :company do
-    get '/analysis', to: 'analysis#show', as: :analysis
+    get '/analysis', to: 'analysis#index', as: :analysis
+    get '/price_history', to: 'price_history#index', as: :price_history
   end
   get 'trash', to: 'dashboard#trash'
   root 'dashboard#trash'
-  #root 'dashboard#index'
+  # root 'dashboard#index'
   # root 'pages#home'
 end

@@ -88,36 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
     t.index ["company_id"], name: "index_price_history_dailies_on_company_id"
   end
 
-  create_table "price_history_monthlies", force: :cascade do |t|
-    t.float "open", null: false
-    t.float "low", null: false
-    t.float "high", null: false
-    t.float "close", null: false
-    t.float "adjusted_close", null: false
-    t.float "dividend_amount", null: false
-    t.bigint "volume", null: false
-    t.datetime "date", null: false
-    t.bigint "company_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_price_history_monthlies_on_company_id"
-  end
-
-  create_table "price_history_weeklies", force: :cascade do |t|
-    t.float "open", null: false
-    t.float "high", null: false
-    t.float "low", null: false
-    t.float "close", null: false
-    t.float "adjusted_close", null: false
-    t.float "dividend_amount", null: false
-    t.bigint "volume", null: false
-    t.datetime "date", null: false
-    t.bigint "company_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_price_history_weeklies_on_company_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -137,6 +107,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_233458) do
   add_foreign_key "company_infos", "companies"
   add_foreign_key "dividend_histories", "companies"
   add_foreign_key "price_history_dailies", "companies"
-  add_foreign_key "price_history_monthlies", "companies"
-  add_foreign_key "price_history_weeklies", "companies"
 end

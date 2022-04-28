@@ -1,4 +1,4 @@
-class Company::AnalysisController < ApplicationController
+class PriceHistoryController < ApplicationController
   def index
     @company = Company.find(params[:company_id])
   end

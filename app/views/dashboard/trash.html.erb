@@ -37,7 +37,8 @@
         <% @accounts.each do |account| %>
           <% account.companies.uniq.each do |company| %>
             <tr>
-              <td><%= company.symbol %></td>
+              <!-- <td><%# link_to company.symbol, company_price_history_path(company) %></td> -->
+              <td><%= link_to company.symbol, company_analysis_path(company) %></td>
               <td><%= company.account_holdings.sum(:shares) %></td>
               <td><%= company.price_history_dailies.last.close %></td>
               <td></td>

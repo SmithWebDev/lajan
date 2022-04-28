@@ -12,10 +12,6 @@ task fetch_api_calls: :environment do
     # API call variables
     company_info = client.stock(symbol: company).fundamental_data.overview
     daily         = client.stock(symbol: company).timeseries(outputsize: 'full').output['Time Series (Daily)']
-    weekly        = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                             type: 'weekly').output['Weekly Adjusted Time Series']
-    monthly       = client.stock(symbol: company).timeseries(outputsize: 'full', adjusted: true,
-                                                             type: 'monthly').output['Monthly Adjusted Time Series']
 
     past_dividend = StockQuote::Stock.batch('dividends', company, '5y')
     next_dividend = StockQuote::Stock.batch('dividends', company, 'next')
@@ -44,38 +40,38 @@ task fetch_api_calls: :environment do
     ).find_or_create_by(company_id: c.id, latestquarter: company_info['LatestQuarter'])
     puts "#{company_info['Name']} added"
 
-    monthly.each do |month|
-      PriceHistoryMonthly.find_or_create_by(
-        company_id: c.id,
-        open: month[1]['1. open'].to_f,
-        high: month[1]['2. high'].to_f,
-        low: month[1]['3. low'].to_f,
-        close: month[1]['4. close'].to_f,
-        adjusted_close: month[1]['5. adjusted close'].to_f,
-        volume: month[1]['6. volume'],
-        dividend_amount: month[1]['7. dividend amount'].to_f,
-        date: month[0]
-      )
-    end
-    puts "#{company_info['Name']} monthly price history added"
+    # monthly.each do |month|
+    #   PriceHistoryMonthly.create_with(
+    #     company_id: c.id,
+    #     open: month[1]['1. open'].to_f,
+    #     high: month[1]['2. high'].to_f,
+    #     low: month[1]['3. low'].to_f,
+    #     close: month[1]['4. close'].to_f,
+    #     adjusted_close: month[1]['5. adjusted close'].to_f,
+    #     volume: month[1]['6. volume'],
+    #     dividend_amount: month[1]['7. dividend amount'].to_f,
+    #     date: month[0]
+    #   ).find_or_create_by(company_id: c.id, date: month[0])
+    # end
+    # puts "#{company_info['Name']} monthly price history added"
 
-    weekly.each do |week|
-      PriceHistoryWeekly.find_or_create_by(
-        company_id: c.id,
-        open: week[1]['1. open'].to_f,
-        high: week[1]['2. high'].to_f,
-        low: week[1]['3. low'].to_f,
-        close: week[1]['4. close'].to_f,
-        adjusted_close: week[1]['5. adjusted close'].to_f,
-        volume: week[1]['6. volume'],
-        dividend_amount: week[1]['7. dividend amount'].to_f,
-        date: week[0]
-      )
-    end
-    puts "#{company_info['Name']} weekly price history added"
+    # weekly.each do |week|
+    #   PriceHistoryWeekly.create_with(
+    #     company_id: c.id,
+    #     open: week[1]['1. open'].to_f,
+    #     high: week[1]['2. high'].to_f,
+    #     low: week[1]['3. low'].to_f,
+    #     close: week[1]['4. close'].to_f,
+    #     adjusted_close: week[1]['5. adjusted close'].to_f,
+    #     volume: week[1]['6. volume'],
+    #     dividend_amount: week[1]['7. dividend amount'].to_f,
+    #     date: week[0]
+    #   ).find_or_create_by(company_id: c.id, date: week[0])
+    # end
+    # puts "#{company_info['Name']} weekly price history added"
 
     daily.each do |day|
-      PriceHistoryDaily.find_or_create_by(
+      PriceHistoryDaily.create_with(
         company_id: c.id,
         open: day[1]['1. open'].to_f,
         high: day[1]['2. high'].to_f,
@@ -83,12 +79,12 @@ task fetch_api_calls: :environment do
         close: day[1]['4. close'].to_f,
         volume: day[1]['5. volume'],
         date: day[0]
-      )
+      ).find_or_create_by(company_id: c.id, date: day[0])
     end
     puts "#{company_info['Name']} daily price history added"
 
     next_dividend.dividends.each do |div|
-      DividendHistory.find_or_create_by(
+      DividendHistory.create_with(
         company_id: c.id,
         amount: div['amount'],
         declared_date: div['declaredDate'],
@@ -96,12 +92,12 @@ task fetch_api_calls: :environment do
         frequency: div['frequency'],
         payment_date: div['paymentDate'],
         record_date: div['recordDate']
-      )
+      ).find_or_create_by(company_id: c.id, declared_date: div['declaredDate'])
     end
     puts "#{company_info['Name']} next dividend added"
 
     past_dividend.dividends.each do |div|
-      DividendHistory.find_or_create_by(
+      DividendHistory.create_with(
         company_id: c.id,
         amount: div['amount'],
         declared_date: div['declaredDate'],
@@ -109,10 +105,10 @@ task fetch_api_calls: :environment do
         frequency: div['frequency'],
         payment_date: div['paymentDate'],
         record_date: div['recordDate']
-      )
+      ).find_or_create_by(company_id: c.id, declared_date: div['declaredDate'])
     end
     puts "#{company_info['Name']} past dividend history added"
 
-    sleep 60
+    sleep 20
   end
 end

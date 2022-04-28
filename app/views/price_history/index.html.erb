@@ -1,0 +1,31 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>Date</th>
+      <th scope='col'>Open</th>
+      <th scope='col'>High</th>
+      <th scope='col'>Low</th>
+      <th scope='col'>Close</th>
+      <th scope='col'>Volume</th>
+      <th scope='col'>Dividend Amount</th>
+      <th scope='col'>misc</th>
+    </tr>
+  </thead>
+  <tbody class="table-striped">
+    <% @company.price_history_dailies.each do |price| %>
+      <tr>
+        <td><%= price.date.to_date.to_fs(:iso8601) %></td>
+        <td><%= price.open %></td>
+        <td><%= price.high %></td>
+        <td><%= price.low %></td>
+        <td><%= price.close %></td>
+        <td><%= price.volume %></td>
+        <% if @company.dividend_histories.find_by(payment_date: price.date) == nil %>
+          <td></td>
+        <% else %>
+          <td><%= @company.dividend_histories.find_by(payment_date: price.date).amount %></td>
+        <% end %>
+      <% end %>
+      </tr>
+  </tbody>
+</table>
