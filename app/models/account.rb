@@ -16,4 +16,12 @@ class Account < ApplicationRecord
   belongs_to :user
   has_many :account_holdings, dependent: :destroy
   has_many :companies, through: :account_holdings
+
+  def portfolio_yield; end
+
+  def annual_income; end
+
+  def amount_invested
+    # account_holdings.principle_invested
+  end
 end

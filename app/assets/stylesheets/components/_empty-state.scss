@@ -1,0 +1,11 @@
+.empty-state {
+  padding: 3rem;
+  border-style: dashed;
+  margin: auto;
+  text-align: center;
+
+  &__text {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}

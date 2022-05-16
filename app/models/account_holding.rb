@@ -24,6 +24,18 @@ class AccountHolding < ApplicationRecord
   belongs_to :company
   belongs_to :account
 
-  def total_shares_owned
+  def total_shares_owned; end
+
+  def annual_dividend_income; end
+
+  def stock_annual_income
+    dividend_amount = company.company_infos.last.dividend_per_share
+    shares * dividend_amount
   end
+
+  def principle_invested
+    shares * cost_per_share
+  end
+
+  def amount_invested; end
 end

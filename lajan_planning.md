@@ -46,3 +46,12 @@
 * Add new account (needs parameters permitted)
 * Show contents of account in the dashboard
 * add new holdings to current account
+
+
+---
+* Portfolio yield (annual income/ account balance)
+* Annual Income (no of shares owned * annual dividend)
+* Previous Close
+* Dividend History page
+
+Company::AnalysisController < ApplicationController

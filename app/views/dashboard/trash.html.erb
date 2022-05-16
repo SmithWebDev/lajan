@@ -1,57 +1,57 @@
-<% if current_user %>
-  <div class="account_info">
-    <% if current_user.accounts.empty? %>
+  <!-- <div class="account_info">
+    <%# <% %> if current_user.accounts.empty? %>
+      <%# <%= render "layouts/empty_state" %> %>
+    <%# <% else %> %>
       <ul>
-        <li><%= link_to "Add Account", new_account_path %></li>
-      <% else %>
+        <li><%= link_to "All Portfolios", root_path %></li>
+        <%# <% @accounts.each do |account| %> %>
+          <%# <li><%= link_to account.account_name, account_path(account) %></li> %>
+        <%# <% end %> %>
+        <%# <li><%= link_to "Add Account", new_account_path %></li> %>
+        <%# <%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary justify-content-end' %> %>
+      </ul>
+    <%# <% end %> %>
+  </div> -->
+
+  <% if current_user.accounts.empty? %>
+      <%= render "layouts/empty_state" %>
+  <% else %>
+    <div class="account-balance">
+      <div>
+        <h1><%= number_to_currency(@total_principle_invested) %></h1>
+        <p>$500</p>
+    </div>
+        <div class='holding'>
+          <%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary justify-content-end' %>
+        </div>
+    </div>
+    <div class="primary-info">
+      <div class="card1">
+        <h6>Portfolio Yield</h6>
+        <h2><%= @account.portfolio_yield %></h2>
+      </div>
+      <div class="card2">
+        <h6>Annual Income</h6>
+        <h2><%= number_to_currency(@total) %></h2>
+      </div>
+      <div class="card3">
+        <h6>Yield on Cost</h6>
+        <h2>4%</h2>
+      </div>
+      <div class="card4">
+        <h6></h6>
+        <h2></h2>
+      </div>
+    </div>
+      <ul class='primary-info'>
         <li><%= link_to "All Portfolios", root_path %></li>
         <% @accounts.each do |account| %>
           <li><%= link_to account.account_name, account_path(account) %></li>
         <% end %>
         <li><%= link_to "Add Account", new_account_path %></li>
-        <div class="account_holding">
-          <%= link_to "Add Holding", new_account_holding_path, class: 'btn btn-primary' %>
-        </div>
       </ul>
-    <% end %>
-  </div>
-
-  <% if current_user.accounts.empty? %>
-  <% else %>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th scope='col'>TICKER</th>
-          <th scope='col'>SHARES</th>
-          <th scope='col'>PRICE</th>
-          <th scope='col'>CHANGE</th>
-          <th scope='col'>AVERAGE COST</th>
-          <th scope='col'>PROFIT/LOSS</th>
-          <th scope='col'>DIVIDEND YIELD</th>
-          <th scope='col'>YIELD ON COST</th>
-          <th scope='col'>ANNUAL INCOME</th>
-          <th scope='col'>misc</th>
-        </tr>
-      </thead>
-      <tbody class="table-striped">
-        <% @accounts.each do |account| %>
-          <% account.companies.uniq.each do |company| %>
-            <tr>
-              <!-- <td><%# link_to company.symbol, company_price_history_path(company) %></td> -->
-              <td><%= link_to company.symbol, company_analysis_path(company) %></td>
-              <td><%= company.account_holdings.sum(:shares) %></td>
-              <td><%= company.price_history_dailies.last.close %></td>
-              <td></td>
-              <td><%= company.account_holdings.average(:cost_per_share).round(2) %></td>
-              <td></td>
-              <td><%= company.company_infos.last.dividend_yield %></td>
-              <td></td>
-              <td><%= company.company_infos.last.dividend_per_share %></td>
-              <td></td>
-            </tr>
-          <% end %>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render "dashboard/table" %>
   <% end %>
-<% end %>
+
+
+  <%= @total_shares %>

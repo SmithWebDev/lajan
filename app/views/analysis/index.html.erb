@@ -1,0 +1,61 @@
+<div class="company_header" style="display: flex; justify_content: end; align-items: center;">
+  <h1><%= @company.name %></h1> <small>$<%= @company.symbol %></small>
+</div>
+<small><%= link_to "Price History" , company_price_history_path(@company) %></small>
+<small><%= link_to "Dividend History" , company_price_history_path(@company) %></small>
+<% if @company.description == 'None' %>
+  <% else %>
+<p><%= @company.description %></p>
+<% end %>
+
+<%= link_to sanitize("&larr; Back to Dashboard"), root_path, class: 'btn btn-primary' %>
+<table class="table">
+  <tbody>
+<tr>
+  <th scope="row">Exchange</th>
+  <td class='justify-content-end'><%= @company.exchange %></td>
+</tr>
+<tr>
+  <th scope="row">Sector</th>
+  <td class='justify-content-end'><%= @company.sector %></td>
+</tr>
+<tr>
+  <th scope="row">Industry</th>
+  <td class='justify-content-end'><%= @company.industry %></td>
+</tr>
+    <tr>
+      <th scope="row">Today's High/Low</th>
+      <td class='justify-content-end'><%= @company.price_history_dailies.last.high %> / <%= @company.price_history_dailies.last.low %></td>
+    </tr>
+    <tr>
+      <th scope="row">Today's Volume</th>
+      <td class='justify-content-end'><%= @company.price_history_dailies.last.volume %></td>
+    </tr>
+    <tr>
+      <th scope="row">Previous Close</th>
+    </tr>
+    <tr>
+      <th scope="row">52 Week High/Low</th>
+      <td class='justify-content-end'><%= @company.company_infos.last.year_high %> / <%= @company.company_infos.last.year_low %></td>
+    </tr>
+    <tr>
+      <th scope="row">Annualized Dividend</th>
+      <td class='justify-content-end'>$<%= @company.company_infos.last.dividend_per_share %></td>
+    </tr>
+    <tr>
+      <th scope="row">Ex Dividend Date</th>
+      <td class='justify-content-end'><%= @company.dividend_histories.first.exdate.to_date %></td>
+    </tr>
+    <tr>
+      <th scope="row">Dividend Pay Date</th>
+      <td class='justify-content-end'><%= @company.dividend_histories.first.payment_date.to_date %></td>
+    </tr>
+    <tr>
+      <th scope="row">Current Yield</th>
+      <td class='justify-content-end'><%= @company.company_infos.last.dividend_yield * 100 %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<%# tr>th[scope='row'] %>
