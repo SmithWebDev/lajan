@@ -1,0 +1,7 @@
+<% if @empty %>
+  <%= render 'layouts/empty_state'  %>
+<% else %>
+  <%= render "layouts/acct_header" %>
+  <%= render "dashboard/table" %>
+<% end %>
+

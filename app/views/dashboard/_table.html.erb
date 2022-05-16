@@ -1,0 +1,37 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>TICKER</th>
+      <th scope='col'>SHARES</th>
+      <th scope='col'>PRICE</th>
+      <th scope='col'>CHANGE</th>
+      <th scope='col'>AVERAGE COST</th>
+      <th scope='col'>PROFIT/LOSS</th>
+      <th scope='col'>DIVIDEND YIELD</th>
+      <th scope='col'>YIELD ON COST</th>
+      <th scope='col'>ANNUAL INCOME</th>
+      <th scope='col'>misc</th>
+    </tr>
+  </thead>
+  <tbody class="table-striped">
+    <%# @accounts.each do |account| %>
+      <%# account.companies.uniq.each do |company| %>
+        <tr>
+          <td><%# link_to company.symbol, company_analysis_path(company) %></td>
+          <td><%# company.total_shares_owned.to_i %></td>
+          <td><%# number_to_currency(company.last_price) %></td>
+          <td></td>
+          <td><%# number_to_currency(company.avg_cost_per_share) %></td>
+          <td></td>
+          <td><%# number_to_percentage(company.dividend_yield, precision: 2) %></td>
+          <td><%# company.yield_on_cost %></td>
+          <td><%# number_to_currency(company.annual_dividend_income) %></td>
+          <td></td>
+        </tr>
+      <%# end %>
+    <%# end %>
+
+  </tbody>
+</table>
+
+total_shares_owned *

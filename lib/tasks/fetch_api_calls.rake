@@ -5,8 +5,7 @@ task fetch_api_calls: :environment do
   client = Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
   stock  = StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
   # business = Polygonio::Rest::Client(Rails.application.credentials.dig(:polygonio, :key))
-
-  list_of_companies = %w[BXMT MAIN INTC BRMK HD AAPL UGI MO MMM O IRM ARR GROW GAIN LAND]
+  list_of_companies = %w[BXMT MAIN INTC BRMK HD AAPL UGI MO MMM O IRM ARR GROW GAIN LAND CAT ADP MPLX CC LADR]
 
   list_of_companies.each do |company|
     # API call variables
@@ -109,6 +108,6 @@ task fetch_api_calls: :environment do
     end
     puts "#{company_info['Name']} past dividend history added"
 
-    sleep 20
+    sleep 30
   end
 end

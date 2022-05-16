@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   resources :company do
     get '/analysis', to: 'analysis#index', as: :analysis
     get '/price_history', to: 'price_history#index', as: :price_history
+    get '/dividend_history', to: 'dividend_history#index', as: :dividend_history
   end
   get 'trash', to: 'dashboard#trash'
-  root 'dashboard#trash'
+  root 'dashboard#trash2'
   # root 'dashboard#index'
   # root 'pages#home'
 end
