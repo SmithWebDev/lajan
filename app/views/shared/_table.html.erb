@@ -25,7 +25,9 @@
           <td></td>
           <td><%= number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
           <td><%# holding.yield_on_cost %></td>
-          <td><%# number_to_currency(holding.company.annual_dividend_income) %></td>
+          <td><%# number_to_currency(holding.company.annual_dividend_income) %>
+          <%= holding.stock_annual_income %>
+        </td>
           <td><%= number_to_percentage(holding.company.yield_on_current_close, precision: 2) %> </td>
         </tr>
       <% end %>
@@ -33,4 +35,4 @@
   </tbody>
 </table>
 
-total_shares_owned *
+total_shares_owned

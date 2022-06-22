@@ -42,14 +42,6 @@ class Company < ApplicationRecord
   #  account_holdings.average(:cost_per_share).round(2)
   # end
 
-  # def total_shares_owned
-  #  account_holding.shares
-  # end
-
-  # def annual_dividend_income
-  #   dividend_per_share * total_shares_owned
-  # end
-
   def yield_on_cost
     dividend_per_share / account_holdings.cost_per_share
   end
