@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_account, only: %i[show edit update]
+  # before_action :set_current_account
 
   # def index
   #   @account = Account.find_by(params[:id])
@@ -35,14 +35,18 @@ class DashboardController < ApplicationController
 
   def trash2
     @empty = current_user.accounts.empty?
+    @user = current_user
     @accounts = current_user.accounts
-    # @account = current_user.accounts.find(params[:account_id])
   end
 
   private
 
-  def set_account
-    @account = current_user.accounts.find(params[:account_id])
+  def set_current_account
+    @account = if session[:current_account_id].present?
+                 Account.find(session[:current_account_id])
+               else
+                 current_user.accounts.first
+               end
   end
 
   def set_company_info

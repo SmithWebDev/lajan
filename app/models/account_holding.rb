@@ -24,8 +24,6 @@ class AccountHolding < ApplicationRecord
   belongs_to :company
   belongs_to :account
 
-  def total_shares_owned; end
-
   def annual_dividend_income; end
 
   def stock_annual_income
