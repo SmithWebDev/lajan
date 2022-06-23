@@ -7,6 +7,7 @@
       <th scope='col'>CHANGE</th>
       <th scope='col'>AVERAGE COST</th>
       <th scope='col'>PROFIT/LOSS</th>
+      <th scope='col'>YIELD CHECK</th>
       <th scope='col'>DIVIDEND YIELD</th>
       <th scope='col'>YIELD ON COST</th>
       <th scope='col'>ANNUAL INCOME</th>
@@ -14,6 +15,7 @@
     </tr>
   </thead>
   <tbody class="table-striped">
+    Portfolio Transactions
     <% @accounts.each do |account| %>
       <% account.account_holdings.each do |holding| %>
         <tr>
@@ -23,10 +25,10 @@
           <td></td>
           <td><%= number_to_currency(holding.cost_per_share) %></td>
           <td></td>
+          <td> <%= number_to_currency(holding.company.yield_check) %> </td>
           <td><%= number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
-          <td><%# holding.yield_on_cost %></td>
-          <td><%# number_to_currency(holding.company.annual_dividend_income) %>
-          <%= holding.stock_annual_income %>
+          <td> <%= number_to_percentage(holding.yield_on_cost, precision: 2) %></td>
+          <td><%= holding.stock_annual_income %>
         </td>
           <td><%= number_to_percentage(holding.company.yield_on_current_close, precision: 2) %> </td>
         </tr>
@@ -35,4 +37,4 @@
   </tbody>
 </table>
 
-total_shares_owned
+

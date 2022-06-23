@@ -31,6 +31,11 @@ class AccountHolding < ApplicationRecord
     shares * dividend_amount
   end
 
+  def yield_on_cost
+    dividend_amount = company.company_infos.last.dividend_per_share
+    (dividend_amount / cost_per_share) * 100
+  end
+
   def principle_invested
     shares * cost_per_share
   end

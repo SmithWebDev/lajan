@@ -38,6 +38,9 @@ class Company < ApplicationRecord
     (dividend_per_share / last_price) * 100
   end
 
+  def yield_check
+    (dividend_per_share / dividend_yield) * 100
+  end
   # def avg_cost_per_share
   #  account_holdings.average(:cost_per_share).round(2)
   # end
