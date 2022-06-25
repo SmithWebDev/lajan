@@ -16,8 +16,8 @@
 class Company < ApplicationRecord
   has_many :company_infos, dependent: :destroy
   has_many :price_history_dailies, dependent: :destroy
-  has_many :price_history_weeklies, dependent: :destroy
-  has_many :price_history_monthlies, dependent: :destroy
+  # has_many :price_history_weeklies, dependent: :destroy
+  # has_many :price_history_monthlies, dependent: :destroy
   has_many :dividend_histories, dependent: :destroy
   has_many :account_holdings
   has_many :accounts, through: :account_holdings

@@ -19,7 +19,7 @@
     <% @accounts.each do |account| %>
       <% account.account_holdings.each do |holding| %>
         <tr>
-          <td><%= link_to holding.company.symbol, company_analysis_path(holding) %></td>
+          <td><%= link_to holding.company.symbol, company_analysis_path(holding.company.id) %></td>
           <td><%= holding.shares %></td>
           <td><%= number_to_currency(holding.company.last_price) %></td>
           <td></td>
@@ -28,9 +28,64 @@
           <td> <%= number_to_currency(holding.company.yield_check) %> </td>
           <td><%= number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
           <td> <%= number_to_percentage(holding.yield_on_cost, precision: 2) %></td>
-          <td><%= holding.stock_annual_income %>
+          <td><%= number_to_currency(holding.stock_annual_income) %>
         </td>
           <td><%= number_to_percentage(holding.company.yield_on_current_close, precision: 2) %> </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<hr>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th scope='col'>TICKER</th>
+      <th scope='col'>SHARES</th>
+      <th scope='col'>PRICE</th>
+      <th scope='col'>CHANGE</th>
+      <th scope='col'>AVERAGE COST</th>
+      <th scope='col'>PROFIT/LOSS</th>
+      <th scope='col'>YIELD CHECK</th>
+      <th scope='col'>DIVIDEND YIELD</th>
+      <th scope='col'>YIELD ON COST</th>
+      <th scope='col'>ANNUAL INCOME</th>
+      <th scope='col'>CURRENT CLOSE YIELD %</th>
+    </tr>
+  </thead>
+  <tbody class="table-striped">
+    Portfolio totals
+    <%# @accounts.each do |account| %>
+      <%# account.account_holdings.each do |holding| %>
+        <% @accounts.each do |acct| %>
+          <% acct.companies.uniq.each do |data| %>
+        <tr>
+          <td><%= data.symbol %></td>
+          <td>
+            <%= data.account_holdings.where(account_id: acct) %>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!-- <td><%# link_to holding.company.symbol, company_analysis_path(holding) %></td> -->
+          <!-- <td><%# holding.shares %></td> -->
+          <!-- <td><%# number_to_currency(holding.company.last_price) %></td> -->
+          <!-- <td></td> -->
+          <!-- <td><%# number_to_currency(holding.cost_per_share) %></td> -->
+          <!-- <td></td> -->
+          <!-- <td><%# number_to_currency(holding.company.yield_check) %> </td> -->
+          <!-- <td><%# number_to_percentage(holding.company.dividend_yield, precision: 2) %></td> -->
+          <!-- <td><%# number_to_percentage(holding.yield_on_cost, precision: 2) %></td> -->
+          <!-- <td><%# holding.stock_annual_income %> </td> -->
+          <!-- <td><%# number_to_percentage(holding.company.yield_on_current_close, precision: 2) %> </td> -->
         </tr>
       <% end %>
     <% end %>
