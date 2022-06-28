@@ -3,7 +3,7 @@
 # Table name: accounts
 #
 #  id           :bigint           not null, primary key
-#  account_name :string           default("Default Portfolio")
+#  account_name :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  user_id      :bigint
