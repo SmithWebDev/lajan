@@ -2,11 +2,6 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
   # before_action :set_current_account
 
-  # def index
-  #   @account = Account.find_by(params[:id])
-  #   @company = Company.all
-  # end
-
   def trash
     @accounts = current_user.accounts
     @account = current_user.accounts.first

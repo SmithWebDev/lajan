@@ -9,6 +9,7 @@
 <% end %>
 
 <%= link_to sanitize("&larr; Back to Dashboard"), root_path, class: 'btn btn-primary' %>
+<hr>
 <table class="table">
   <tbody>
 <tr>
@@ -33,6 +34,7 @@
     </tr>
     <tr>
       <th scope="row">Previous Close</th>
+      <td class='justify-content-end'><%= @company.price_history_dailies.last.close %></td>
     </tr>
     <tr>
       <th scope="row">52 Week High/Low</th>
@@ -40,15 +42,12 @@
     </tr>
     <tr>
       <th scope="row">Annualized Dividend</th>
-      <td class='justify-content-end'>$<%= @company.company_infos.last.dividend_per_share %></td>
-    </tr>
-    <tr>
-      <th scope="row">Ex Dividend Date</th>
-      <td class='justify-content-end'><%= @company.dividend_histories.first.exdate.to_date %></td>
+      <td class='justify-content-end'>$<%= @company.company_infos.last.dividend_per_share %></td> </tr>
+    <tr> <th scope="row">Ex Dividend Date</th> <td class='justify-content-end'><%= @company.dividend_histories.last.exdate.to_date %></td>
     </tr>
     <tr>
       <th scope="row">Dividend Pay Date</th>
-      <td class='justify-content-end'><%= @company.dividend_histories.first.payment_date.to_date %></td>
+      <td class='justify-content-end'><%= @company.dividend_histories.last.payment_date.to_date %></td>
     </tr>
     <tr>
       <th scope="row">Current Yield</th>

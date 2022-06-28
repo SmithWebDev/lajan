@@ -28,5 +28,5 @@
 class CompanyInfo < ApplicationRecord
   belongs_to :company
 
-  default_scope { order(created_at: :asc)}
+  default_scope { order(created_at: :asc) }
 end

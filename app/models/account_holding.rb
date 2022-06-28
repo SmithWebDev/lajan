@@ -40,5 +40,9 @@ class AccountHolding < ApplicationRecord
     shares * cost_per_share
   end
 
+  def profit_loss
+    company.price_history_dailies.last.close - cost_per_share
+  end
+
   def amount_invested; end
 end
