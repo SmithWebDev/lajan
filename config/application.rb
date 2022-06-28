@@ -1,17 +1,17 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "active_storage/engine"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_mailbox/engine"
-require "action_text/engine"
-require "action_view/railtie"
-require "action_cable/engine"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'active_storage/engine'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_mailbox/engine'
+require 'action_text/engine'
+require 'action_view/railtie'
+require 'action_cable/engine'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -30,17 +30,18 @@ module Lajan
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.autoload_paths << "#{root}/app/lib"
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-config.generators do |g|
-  g.test_framework :rspec,
-    fixtures: false,
-    view_specs: false,
-    helper_specs: false,
-    routing_specs: false,
-    controller_specs: false
-  g.factory_bot suffix: "factory"
-end
+    config.generators do |g|
+      g.test_framework :rspec,
+                       fixtures: false,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: false
+      g.factory_bot suffix: 'factory'
+    end
   end
 end
