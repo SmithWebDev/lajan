@@ -5,8 +5,8 @@ task fetch_api_calls: :environment do
   client = Alphavantage::Client.new key: Rails.application.credentials.dig(:alphavantage, :key)
   stock  = StockQuote::Stock.new(api_key: Rails.application.credentials.dig(:stockquote, :key))
   # business = Polygonio::Rest::Client(Rails.application.credentials.dig(:polygonio, :key))
-  list_of_companies = %w[BXMT MAIN INTC BRMK HD AAPL UGI MO MMM O IRM ARR GROW GAIN LAND CAT ADP MPLX CC LADR JPM APD PEP PPL WM XOM SCHD SJT PVL CRT ORC PII FMS GS ABT NEE TMO ORCL UNP LLY AXP]
-  # list_of_companies = %w[GS ABT NEE TMO ORCL UNP LLY AXP]
+  list_of_companies = %w[BXMT MAIN INTC BRMK HD AAPL UGI MO MMM O IRM ARR GROW GAIN LAND CAT ADP MPLX CC LADR JPM APD PEP PPL WM XOM NEE SJT PVL CRT ORC PII FMS GS ABT TMO ORCL UNP LLY AXP AJX AB WMC RC NLY FSK NYMT VALE SBLK ZIM CVX WBA LEG PM VZ UVV KMI EPD ABR ARE EQR]
+  # list_of_companies = %w[ARE EQR]
 
   list_of_companies.each do |company|
     # API call variables
