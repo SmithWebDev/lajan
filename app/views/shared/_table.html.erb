@@ -24,7 +24,7 @@
           <td><%= number_to_currency(holding.company.last_price) %></td>
           <td></td>
           <td><%= number_to_currency(holding.cost_per_share) %></td>
-          <td></td>
+          <td> <%= number_to_currency(holding.profit_loss) %> </td>
           <td> <%= number_to_currency(holding.company.yield_check) %> </td>
           <td><%= number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
           <td> <%= number_to_percentage(holding.yield_on_cost, precision: 2) %></td>
@@ -66,7 +66,7 @@
           <td>
             <%= data.account_holdings.where(account_id: acct) %>
           </td>
-          <td></td>
+          <td> <%= data.last_price %> </td>
           <td></td>
           <td></td>
           <td></td>
