@@ -3,7 +3,7 @@
 # Table name: accounts
 #
 #  id           :bigint           not null, primary key
-#  account_name :string           default("Default Portfolio")
+#  account_name :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  user_id      :bigint
@@ -17,7 +17,9 @@ class Account < ApplicationRecord
   has_many :account_holdings, dependent: :destroy
   has_many :companies, through: :account_holdings
 
-  def portfolio_yield; end
+  def portfolio_total
+    account_holdings.shares
+  end
 
   def annual_income; end
 
