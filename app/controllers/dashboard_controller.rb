@@ -34,6 +34,8 @@ class DashboardController < ApplicationController
     @accounts = current_user.accounts
   end
 
+  def tester; end
+
   private
 
   def set_current_account

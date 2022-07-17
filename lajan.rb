@@ -77,9 +77,9 @@ RSpec.configure do |config|
 end
 
 # ----
-gem 'vcr' => group: :development, :test
-gem 'vcr_cable' => group: :development, :test
-gem 'webmock' => group: :development, :test
+# gem 'vcr' => group: :development, :test
+#gem 'vcr_cable' => group: :development, :test
+#gem 'webmock' => group: :development, :test
 
 # ---- OPTION1
 npm i bootstrap-icons
@@ -94,7 +94,7 @@ npm i --save @fortawesome/fontawesome-free
 # app/javascript/application.js
 import '@fortawesome/fontawesome-free/js/all'
 
-#---- 
+#----
 #app/javascript/application.js
  document.addEventListener('turbo:load', () => {
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -110,3 +110,4 @@ import '@fortawesome/fontawesome-free/js/all'
 #
 # REMINDER
 # brew services start redis
+#
