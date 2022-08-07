@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     get '/dividend_history', to: 'dividend_history#index', as: :dividend_history
   end
   get 'trash', to: 'dashboard#trash'
-  get 'tester', to: 'dashboard#tester'
-  root 'dashboard#trash2'
+  root 'dashboard#tester'
+  # root 'dashboard#trash2'
   # root 'dashboard#index'
   # root 'pages#home'
 end
