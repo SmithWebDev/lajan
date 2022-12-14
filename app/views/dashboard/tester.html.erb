@@ -1,11 +1,114 @@
-
 <p>Total Amount Invested</p>
 
-<p>Invested Principle</p>
+<p>Invested Principle <small>( increase / descrease )</small></p>
 
-<p>Increase/Descrease</p>
+<ul>
+  <%= User.first.accounts.last.account_name %>
+  <li>Summary Dashboard</li>
+  <li>Portfolio #1</li>
+  <li>Portfolio #2</li>
+  <li>link to add another portfolio</li>
+</ul>
+<hr>
 
 <p>Portfolio Yield</p>
 
 <p>Yield (Cost Basis)</p>
 
+<p>Annual Income</p>
+
+<p>Drip Adjusted Income</p>
+<hr>
+
+<p>Company Ticker Symbol</p>
+<p>Name of Company</p>
+
+<p>Number of Shares Owned</p>
+
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Shares</th>
+      <th>Price</th>
+      <th>Change</th>
+      <th>Average Cost</th>
+      <th>Profit/ Loss</th>
+      <th>Dividend Yield</th>
+      <th>Yield on Cost</th>
+      <th>Annual Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= Company.first.symbol %><br><%= Company.first.name %></td>
+      <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).shares %></td>
+      <td><%= Company.first.price_history_dailies.last.close %></td>
+      <!-- TODO: check on the change displayed in pricing -->
+      <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) %><small style="font-size: 0.5rem"><%# User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) /  %>%</small></td>
+      <td>24.80</td>
+      <td>+43.00</td>
+      <td>10%</td>
+      <td>10.43%</td>
+      <td>248</td>
+    </tr>
+    <tr>
+      <td>BXMT</td>
+      <td>100</td>
+      <td>24.80</td>
+      <td>0.00 <small style="font-size: 0.35rem">0.00%</small></td>
+      <td>24.80</td>
+      <td>+43.00</td>
+      <td>10%</td>
+      <td>10.43%</td>
+      <td>248</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<p>Sector Pie chart</p>
+
+<%# ((Company.where(sector: 'TECHNOLOGY').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'MANUFACTURING').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'FINANCE').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'ENERGY & TRANSPORTATION').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'LIFE SCIENCES').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %>
+<hr>
+
+<hr>
+
+<p> Total # of companies in database: <%= Company.all.count %> </p>
+<p>
+Companies in TECHNOLOGY sector: <%= Company.where(sector: 'TECHNOLOGY').count %>
+(<%= ((Company.where(sector: 'TECHNOLOGY').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in MANUFACTURING sector: <%= Company.where(sector: 'MANUFACTURING').count %>
+(<%= ((Company.where(sector: 'MANUFACTURING').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in FINANCE sector: <%= Company.where(sector: 'FINANCE').count %>
+(<%= ((Company.where(sector: 'FINANCE').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in ENERGY & TRANSPORTATION sector: <%= Company.where(sector: 'ENERGY & TRANSPORTATION').count %>
+(<%= ((Company.where(sector: 'ENERGY & TRANSPORTATION').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in LIFE SCIENCES sector: <%= Company.where(sector: 'LIFE SCIENCES').count %>
+(<%= ((Company.where(sector: 'LIFE SCIENCES').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in TRADE & SERVICES sector: <%= Company.where(sector: 'TRADE & SERVICES').count %>
+(<%= ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+<p>
+Companies in REAL ESTATE & CONSTRUCTION sector: <%= Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count %>
+(<%= ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %> %)
+</p>
+
+<%= 17 + 15 + 10 + 19 + 11 + 8 +29 %>
+
+<%= Company.find_by(sector: 'TECHNOLOGY').name %>
+
+<hr>
+
+<p>Expected Dividend Payout</p>
