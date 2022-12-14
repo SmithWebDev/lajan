@@ -25,4 +25,6 @@ class PriceHistoryDaily < ApplicationRecord
   belongs_to :company
 
   default_scope { order(date: :asc) }
+
+  def price_change; end
 end

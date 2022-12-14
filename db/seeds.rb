@@ -4,4 +4,3 @@ User.create!({
                username: FFaker::Internet.unique.user_name,
                email: FFaker::Internet.email
              })
-
