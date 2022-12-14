@@ -53,29 +53,19 @@
       <td><%= (Company.first.price_history_dailies.last.close - User.first.accounts.first.account_holdings.first.cost_per_share).round(2) %> </td>
 
       <!-- NOTE: [Dividend Yield] comes from company quarterly info report -->
-      <td><%= User.first.accounts.first.companies.first.dividend_yield %></td>
+      <td><%= User.first.accounts.first.companies.first.dividend_yield %>%</td>
 
       <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * # of shares purchased) -->
       <td><%= ((Company.first.dividend_per_share / User.first.accounts.first.account_holdings.first.cost_per_share ) * 100) %>%</td>
 
 
-      <!-- NOTE: [Annual Income] -->
-      <td>248</td>
+      <!-- NOTE: [Annual Income] update with sum of shares x last dividend on record-->
+      <td><%= Company.first.company_infos.last.dividend_per_share * User.first.accounts.first.account_holdings.first.shares %></td>
+      <%# <td><%= User.first.accounts.first.account_holdings.first.shares %></td> %>
 
 
       <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (# of shares * dividend_payout) -->
       <td><%= Company.first.company_infos.last.dividend_per_share * AccountHolding.first.shares %></td>
-    </tr>
-    <tr>
-      <td>BXMT</td>
-      <td>100</td>
-      <td>24.80</td>
-      <td>0.00 <small style="font-size: 0.35rem">0.00%</small></td>
-      <td>24.80</td>
-      <td>+43.00</td>
-      <td>10%</td>
-      <td>10.43%</td>
-      <td>248</td>
     </tr>
   </tbody>
 </table>
