@@ -20,11 +20,6 @@
 <p>Drip Adjusted Income</p>
 <hr>
 
-<p>Company Ticker Symbol</p>
-<p>Name of Company</p>
-
-<p>Number of Shares Owned</p>
-
 <table class='table'>
   <thead>
     <tr>
@@ -37,20 +32,39 @@
       <th>Dividend Yield</th>
       <th>Yield on Cost</th>
       <th>Annual Income</th>
+      <th>Drip Adjusted Income</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><%= Company.first.symbol %><br><%= Company.first.name %></td>
+
+      <!-- TODO: change from individual call to each block [Shares] -->
       <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).shares %></td>
       <td><%= Company.first.price_history_dailies.last.close %></td>
-      <!-- TODO: check on the change displayed in pricing -->
-      <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) %><small style="font-size: 0.5rem"><%# User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) /  %>%</small></td>
-      <td>24.80</td>
-      <td>+43.00</td>
-      <td>10%</td>
-      <td>10.43%</td>
+
+      <!-- TODO: correct the change displayed in pricing should show the change in cost compared to previous day [Change] -->
+      <td> <%= User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) %><small style="font-size: 0.5rem"><%# User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) /  %>%</small></td>
+
+      <!-- TODO: change from individual call to each block [Average Cost] -->
+      <td><%= User.first.accounts.first.account_holdings.first.cost_per_share %></td>
+
+      <!-- TODO: [Profit/Loss] update position profit/loss -->
+      <td><%= (Company.first.price_history_dailies.last.close - User.first.accounts.first.account_holdings.first.cost_per_share).round(2) %> </td>
+
+      <!-- NOTE: [Dividend Yield] comes from company quarterly info report -->
+      <td><%= User.first.accounts.first.companies.first.dividend_yield %></td>
+
+      <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * # of shares purchased) -->
+      <td><%= ((Company.first.dividend_per_share / User.first.accounts.first.account_holdings.first.cost_per_share ) * 100) %>%</td>
+
+
+      <!-- NOTE: [Annual Income] -->
       <td>248</td>
+
+
+      <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (# of shares * dividend_payout) -->
+      <td><%= Company.first.company_infos.last.dividend_per_share * AccountHolding.first.shares %></td>
     </tr>
     <tr>
       <td>BXMT</td>

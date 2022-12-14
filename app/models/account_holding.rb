@@ -45,4 +45,5 @@ class AccountHolding < ApplicationRecord
   end
 
   def amount_invested; end
+
 end
