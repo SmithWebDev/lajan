@@ -27,3 +27,6 @@ profit_loss
 
 
 drip_adjusted_income =
+
+dividend_payment_date = Company.first.dividend_histories.last.payment_date
+month_of_dividend_payment_date = Company.first.dividend_histories.last.payment_date.month #=> will provide month as integer

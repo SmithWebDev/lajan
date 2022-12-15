@@ -3,11 +3,12 @@
 <p>Invested Principle <small>( increase / descrease )</small></p>
 
 <ul>
-  <%= User.first.accounts.last.account_name %>
-  <li>Summary Dashboard</li>
-  <li>Portfolio #1</li>
-  <li>Portfolio #2</li>
-  <li>link to add another portfolio</li>
+  <li> <%= link_to 'Summary Dashboard', '#' %> </li>
+  <% current_user.accounts.each do |account| %>
+    <li>
+      <%= link_to account.account_name, account_holdings_path(account) %>
+    </li>
+  <% end %>
 </ul>
 <hr>
 
@@ -18,6 +19,13 @@
 <p>Annual Income</p>
 
 <p>Drip Adjusted Income</p>
+
+<hr>
+
+<hr>
+<!-- NOTE: Remove In-Line styling -->
+<h1>Dashboard Information Table <small style#"font-size: .5em">(single acct, position)</small></h1>
+<hr>
 <hr>
 
 <table class='table'>
@@ -37,10 +45,23 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= Company.first.symbol %><br><%= Company.first.name %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><%= Company.first.symbol %><br><small style='font-size: 0.65em'><%= Company.first.name %></small></td>
 
       <!-- TODO: change from individual call to each block [Shares] -->
       <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).shares %></td>
+
       <td><%= Company.first.price_history_dailies.last.close %></td>
 
       <!-- TODO: correct the change displayed in pricing should show the change in cost compared to previous day [Change] -->
@@ -55,64 +76,61 @@
       <!-- NOTE: [Dividend Yield] comes from company quarterly info report -->
       <td><%= User.first.accounts.first.companies.first.dividend_yield %>%</td>
 
-      <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * # of shares purchased) -->
+      <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * = of shares purchased) -->
       <td><%= ((Company.first.dividend_per_share / User.first.accounts.first.account_holdings.first.cost_per_share ) * 100) %>%</td>
 
 
       <!-- NOTE: [Annual Income] update with sum of shares x last dividend on record-->
       <td><%= Company.first.company_infos.last.dividend_per_share * User.first.accounts.first.account_holdings.first.shares %></td>
-      <%# <td><%= User.first.accounts.first.account_holdings.first.shares %></td> %>
+      <!-- <td><%# User.first.accounts.first.account_holdings.first.shares %></td> -->
 
 
-      <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (# of shares * dividend_payout) -->
+      <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (= of shares * dividend_payout) -->
       <td><%= Company.first.company_infos.last.dividend_per_share * AccountHolding.first.shares %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
 
 <hr>
 
-<p>Sector Pie chart</p>
+<hr>
+<h1>Sector Pie chart</h1>
 
 <%# ((Company.where(sector: 'TECHNOLOGY').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'MANUFACTURING').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'FINANCE').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'ENERGY & TRANSPORTATION').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'LIFE SCIENCES').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) + ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %>
 <hr>
 
 <hr>
 
-<p> Total # of companies in database: <%= Company.all.count %> </p>
-<p>
-Companies in TECHNOLOGY sector: <%= Company.where(sector: 'TECHNOLOGY').count %>
-(<%= ((Company.where(sector: 'TECHNOLOGY').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in MANUFACTURING sector: <%= Company.where(sector: 'MANUFACTURING').count %>
-(<%= ((Company.where(sector: 'MANUFACTURING').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in FINANCE sector: <%= Company.where(sector: 'FINANCE').count %>
-(<%= ((Company.where(sector: 'FINANCE').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in ENERGY & TRANSPORTATION sector: <%= Company.where(sector: 'ENERGY & TRANSPORTATION').count %>
-(<%= ((Company.where(sector: 'ENERGY & TRANSPORTATION').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in LIFE SCIENCES sector: <%= Company.where(sector: 'LIFE SCIENCES').count %>
-(<%= ((Company.where(sector: 'LIFE SCIENCES').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in TRADE & SERVICES sector: <%= Company.where(sector: 'TRADE & SERVICES').count %>
-(<%= ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
-<p>
-Companies in REAL ESTATE & CONSTRUCTION sector: <%= Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count %>
-(<%= ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %> %)
-</p>
+<p> Total = of companies in database: <%= Company.all.count %> </p>
+<p> Companies in TECHNOLOGY sector: <%= Company.where(sector: 'TECHNOLOGY').count %> (<%= ((Company.where(sector: 'TECHNOLOGY').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in MANUFACTURING sector: <%= Company.where(sector: 'MANUFACTURING').count %> (<%= ((Company.where(sector: 'MANUFACTURING').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in FINANCE sector: <%= Company.where(sector: 'FINANCE').count %> (<%= ((Company.where(sector: 'FINANCE').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in ENERGY & TRANSPORTATION sector: <%= Company.where(sector: 'ENERGY & TRANSPORTATION').count %> (<%= ((Company.where(sector: 'ENERGY & TRANSPORTATION').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in LIFE SCIENCES sector: <%= Company.where(sector: 'LIFE SCIENCES').count %> (<%= ((Company.where(sector: 'LIFE SCIENCES').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in TRADE & SERVICES sector: <%= Company.where(sector: 'TRADE & SERVICES').count %> (<%= ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
+<p> Companies in REAL ESTATE & CONSTRUCTION sector: <%= Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count %> (<%= ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
 
 <%= 17 + 15 + 10 + 19 + 11 + 8 +29 %>
 
-<%= Company.find_by(sector: 'TECHNOLOGY').name %>
 
 <hr>
 
-<p>Expected Dividend Payout</p>
+<!-- <p>Expected Dividend Payout</p> -->
+<!-- <p> Dividend ExDate: <%# Company.first.dividend_histories.last.exdate %> </p> -->
+<!-- <p> Dividend ExDate Month: <%# Company.first.dividend_histories.last.exdate.month %> </p> -->
+<!-- <p> Dividend ExDate Year: <%# Company.first.dividend_histories.last.exdate.year %> </p> -->
+<!-- <p> Dividend Payout Date: <%# Company.first.dividend_histories.last.payment_date %> </p> -->
+<!-- <p> Dividend Payout Month: <%# Company.first.dividend_histories.last.payment_date.month %> </p> -->
+<!-- <p> Dividend Payout Year: <%# Company.first.dividend_histories.last.payment_date.year %> </p> -->
