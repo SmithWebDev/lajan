@@ -4,9 +4,9 @@
 
 <ul>
   <li> <%= link_to 'Summary Dashboard', '#' %> </li>
-  <% current_user.accounts.each do |account| %>
+  <% @accounts.each do |account| %>
     <li>
-      <%= link_to account.account_name, account_holdings_path(account) %>
+      <%= link_to account.account_name, account_path(account) %>
     </li>
   <% end %>
 </ul>
@@ -24,7 +24,7 @@
 
 <hr>
 <!-- NOTE: Remove In-Line styling -->
-<h1>Dashboard Information Table <small style#"font-size: .5em">(single acct, position)</small></h1>
+<h1>Dashboard Information Table <small style="font-size: .75rem">(single acct, position)</small></h1>
 <hr>
 <hr>
 
