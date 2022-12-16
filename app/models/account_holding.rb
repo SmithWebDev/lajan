@@ -44,6 +44,9 @@ class AccountHolding < ApplicationRecord
     company.price_history_dailies.last.close - cost_per_share
   end
 
+  def total_shares_owned
+    company.account_holdings.sum(:shares)
+  end
   def amount_invested; end
 
 end
