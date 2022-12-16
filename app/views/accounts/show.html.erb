@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<% if current_user.accounts.empty? %>
-<% else %>
+<%# if current_user.accounts.empty? %>
+<%# else %>
 <table class='table'>
   <thead>
     <tr>
@@ -20,22 +20,30 @@
   <tbody class="table-striped">
       <% @account.account_holdings.each do |holding| %>
         <tr>
-          <td><%= link_to holding.company.symbol, company_analysis_path(holding) %></td>
+          <td><%= holding.company.name %><br><%= link_to holding.company.symbol, company_analysis_path(holding) %></td>
           <td><%= holding.shares %></td>
           <td><%= number_to_currency(holding.company.last_price) %></td>
           <td></td>
           <td><%= number_to_currency(holding.cost_per_share) %></td>
           <td></td>
           <td><%= number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
-          <td><%# holding.yield_on_cost %></td>
-          <td><%# number_to_currency(holding.company.annual_dividend_income) %></td>
+          <td><%= holding.yield_on_cost.round(2) %>%</td>
+          <td><%= number_to_currency(Company.find(55).company_infos.last.dividend_per_share * Company.find(55).account_holdings.sum(:shares))  %></td>
           <td></td>
         </tr>
       <% end %>
   </tbody>
 </table>
 
-<table class='table'>
+<%= Company.find(55).company_infos.last.dividend_per_share %>
+<%= Company.find(55).company_infos.last.dividend_yield %>
+<!-- <br> -->
+holding.company.annual_dividend_income
+<%= total_shares_owned = Company.find(55).account_holdings.sum(:shares) %>
+<%= annual_dividend_payout = (Company.find(55).company_infos.last.dividend_per_share * Company.find(55).account_holdings.sum(:shares)) %>
+
+
+<!-- <table class='table'>
   <thead>
     <tr>
       <th scope='col'>TICKER</th>
@@ -51,23 +59,23 @@
     </tr>
   </thead>
   <tbody class="table-striped">
-      <% @account.companies.each do |company| %>
-        <tr>
-          <td><%= link_to company.symbol, company_analysis_path(company) %></td>
-          <td><%= company.account_holdings.sum(:shares) %></td>
-          <td><%= number_to_currency(company.last_price) %></td>
+      <%# @account.companies.each do |company| %>
+ #       <tr>
+          <td><%# link_to company.symbol, company_analysis_path(company) %></td>
+          <td><%# company.account_holdings.sum(:shares) %></td>
+          <td><%# number_to_currency(company.last_price) %></td>
           <td></td>
-          <td><%= number_to_currency(company.account_holdings.average(:cost_per_share)) %></td>
+          <td><%# number_to_currency(company.account_holdings.average(:cost_per_share)) %></td>
           <td></td>
           <td><%# number_to_percentage(company.account_holdings.dividend_yield, precision: 2) %></td>
           <td><%# holding.yield_on_cost %></td>
           <td><%# number_to_currency(holding.company.annual_dividend_income) %></td>
           <td></td>
         </tr>
-      <% end %>
+      <%# end %>
   </tbody>
-</table>
-<% end %>
+</table> -->
+<%# end %>
 
 <div>
   <%= link_to "Edit this account", edit_account_path(@account) %> |
