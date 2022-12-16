@@ -34,7 +34,9 @@ class DashboardController < ApplicationController
   #   @accounts = current_user.accounts
   # end
 
-  def tester; end
+  def tester
+    @accounts = current_user.accounts
+  end
 
   private
 
@@ -42,8 +44,8 @@ class DashboardController < ApplicationController
     @account = if session[:current_account_id].present?
       Account.find(session[:current_account_id])
     else
-                 current_user.accounts.first
-               end
+      current_user.accounts.first
+    end
   end
 
   def set_company_info
