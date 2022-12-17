@@ -34,18 +34,29 @@
       </tr> -->
     <%# end %>
     <%# Account.find(3).companies.uniq!.each do |company| %>
-      <% current_user.accounts.find(3).companies.uniq.each do |company| %>
+      <% @account.companies.uniq.each do |company| %>
         <tr>
+          <!-- <p> ticker </p> -->
           <td><%= company.symbol%> <br> <%= link_to company.name, '#' %></td>
-          <td><%= company.account_holdings.sum(:shares) %></td>
+          <!-- <p> shares </p> -->
+          <td><%= @account.account_holdings.sum(:shares) %></td>
+          <!-- <p> price </p> -->
           <td><%= company.price_history_dailies.last.close %></td>
+          <!-- <p> change </p> -->
           <td></td>
+          <!-- <p> average cost </p> -->
           <td><%= (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)).round(2) %></td>
+          <!-- <p> profit/loss </p> -->
           <td><%= (company.price_history_dailies.last.close - (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares))).round(2) %></td>
+          <!-- <p> dividend yield </p> -->
           <td><%= number_to_percentage(company.dividend_yield, precision: 2) %></td>
-          <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100) %></td>
+          <!-- <p> yield on cost </p> -->
+          <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+          <!-- <p> dividend per share </p> -->
           <td><%= company.company_infos.last.dividend_per_share %></td>
-          <td><%# company.dividend_histories.last.frequency %><%= (company.company_infos.last.dividend_per_share * company.account_holdings.sum(:shares)) %></td>
+          <!-- <p> Dividend Annual Income </p> -->
+          <td><%= (company.company_infos.last.dividend_per_share * @account.account_holdings.sum(:shares)) %></td>
+          <!-- <p> Dividend Payout </p> -->
           <td></td>
         </tr>
 
@@ -53,16 +64,11 @@
   </tbody>
 </table>
 
-<%= current_user.accounts.find(3).account_holdings.sum(:shares) %>
+<p>Total amount of shares owned: <%= @account.account_holdings.sum(:shares) %></p>
+<p>Total amount of money invested: <%= @account.account_holdings.sum(:total_cost) %></p>
+<p>Total amount of annual income: <%= @sum.sum %></p>
 <br>
-<%= current_user.accounts.find(3).account_holdings.sum(:total_cost) %>
-<br>
-<%# current_user.accounts.find(3).account_holdings.sum(:shares) %>
-<% current_user.accounts.find(3).companies.uniq.each do |company|%>
-  <%= ((company.company_infos.last.dividend_per_share) * company.account_holdings.sum(:shares)) %><br>
-<% end %>
-<br>
-<%= 376 + 63 + 643 %>
+<%# company.dividend_histories.last.frequency %>
 <%# Company.find(55).company_infos.last.dividend_per_share %>
 <%# Company.find(55).company_infos.last.dividend_yield %>
 <br>
