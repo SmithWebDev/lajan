@@ -5,6 +5,7 @@
 #  id             :bigint           not null, primary key
 #  cost_per_share :float
 #  shares         :float
+#  total_cost     :float
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :bigint           not null
@@ -47,6 +48,10 @@ class AccountHolding < ApplicationRecord
   def total_shares_owned
     company.account_holdings.sum(:shares)
   end
+
   def amount_invested; end
 
+  # def total_cost
+  #  shares * cost_per_share
+  # end
 end

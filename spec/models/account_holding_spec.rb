@@ -5,6 +5,7 @@
 #  id             :bigint           not null, primary key
 #  cost_per_share :float
 #  shares         :float
+#  total_cost     :float
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  account_id     :bigint           not null

@@ -10,101 +10,102 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_628_062_516) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_17_052737) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'account_holdings', force: :cascade do |t|
-    t.bigint 'company_id', null: false
-    t.bigint 'account_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.float 'shares'
-    t.float 'cost_per_share'
-    t.index ['account_id'], name: 'index_account_holdings_on_account_id'
-    t.index ['company_id'], name: 'index_account_holdings_on_company_id'
+  create_table "account_holdings", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "shares"
+    t.float "cost_per_share"
+    t.float "total_cost"
+    t.index ["account_id"], name: "index_account_holdings_on_account_id"
+    t.index ["company_id"], name: "index_account_holdings_on_company_id"
   end
 
-  create_table 'accounts', force: :cascade do |t|
-    t.string 'account_name'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id'
-    t.index ['user_id'], name: 'index_accounts_on_user_id'
+  create_table "accounts", force: :cascade do |t|
+    t.string "account_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
-  create_table 'companies', force: :cascade do |t|
-    t.string 'symbol'
-    t.string 'name'
-    t.integer 'cik'
-    t.text 'description'
-    t.string 'exchange'
-    t.string 'sector'
-    t.string 'industry'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "companies", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.integer "cik"
+    t.text "description"
+    t.string "exchange"
+    t.string "sector"
+    t.string "industry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'company_infos', force: :cascade do |t|
-    t.date 'fiscalyearend'
-    t.date 'latestquarter'
-    t.bigint 'ebitda'
-    t.float 'peratio'
-    t.float 'dividend_per_share'
-    t.float 'dividend_yield'
-    t.float 'eps'
-    t.float 'year_high'
-    t.float 'year_low'
-    t.bigint 'shares_outstanding'
-    t.bigint 'company_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['company_id'], name: 'index_company_infos_on_company_id'
+  create_table "company_infos", force: :cascade do |t|
+    t.date "fiscalyearend"
+    t.date "latestquarter"
+    t.bigint "ebitda"
+    t.float "peratio"
+    t.float "dividend_per_share"
+    t.float "dividend_yield"
+    t.float "eps"
+    t.float "year_high"
+    t.float "year_low"
+    t.bigint "shares_outstanding"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_infos_on_company_id"
   end
 
-  create_table 'dividend_histories', force: :cascade do |t|
-    t.float 'amount'
-    t.datetime 'declared_date'
-    t.datetime 'exdate'
-    t.string 'frequency'
-    t.datetime 'payment_date'
-    t.datetime 'record_date'
-    t.bigint 'company_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['company_id'], name: 'index_dividend_histories_on_company_id'
+  create_table "dividend_histories", force: :cascade do |t|
+    t.float "amount"
+    t.datetime "declared_date"
+    t.datetime "exdate"
+    t.string "frequency"
+    t.datetime "payment_date"
+    t.datetime "record_date"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_dividend_histories_on_company_id"
   end
 
-  create_table 'price_history_dailies', force: :cascade do |t|
-    t.float 'open'
-    t.float 'high'
-    t.float 'low'
-    t.float 'close'
-    t.bigint 'volume'
-    t.bigint 'company_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.datetime 'date'
-    t.index ['company_id'], name: 'index_price_history_dailies_on_company_id'
+  create_table "price_history_dailies", force: :cascade do |t|
+    t.float "open"
+    t.float "high"
+    t.float "low"
+    t.float "close"
+    t.bigint "volume"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.index ["company_id"], name: "index_price_history_dailies_on_company_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.string 'username'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.string 'name'
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key 'account_holdings', 'accounts'
-  add_foreign_key 'account_holdings', 'companies'
-  add_foreign_key 'company_infos', 'companies'
-  add_foreign_key 'dividend_histories', 'companies'
-  add_foreign_key 'price_history_dailies', 'companies'
+  add_foreign_key "account_holdings", "accounts"
+  add_foreign_key "account_holdings", "companies"
+  add_foreign_key "company_infos", "companies"
+  add_foreign_key "dividend_histories", "companies"
+  add_foreign_key "price_history_dailies", "companies"
 end
