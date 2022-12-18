@@ -1,7 +1,5 @@
 <p style="color: green"><%= notice %></p>
 
-<%# if current_user.accounts.empty? %>
-<%# else %>
 <table class='table'>
   <thead>
     <tr>
@@ -19,54 +17,38 @@
     </tr>
   </thead>
   <tbody class="table-striped">
-    <%# @account.account_holdings.each do |holding| %>
-      <!-- <tr>
-        <td><%# holding.company.name %><br><%# link_to holding.company.symbol, company_analysis_path(holding) %></td>
-        <td><%# holding.shares %></td>
-        <td><%# number_to_currency(holding.company.last_price) %></td>
+    <% @current_user_accounts.companies.uniq.each do |company| %>
+      <tr>
+        <!-- <p> ticker </p> -->
+        <td><%= link_to company.symbol, '#' %> <br> <small><%= company.name %></small></td>
+        <!-- <p> shares </p> -->
+        <td><%= company.account_holdings.where(account_id: @current_user_accounts).sum(:shares) %></td>
+        <!-- <p> price </p> -->
+        <td><%= number_to_currency(company.price_history_dailies.last.close) %></td>
+        <!-- <p> change </p> -->
         <td></td>
-        <td><%# number_to_currency(holding.cost_per_share) %></td>
+        <!-- <p> average cost </p> -->
+        <td><%= number_to_currency(company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) %></td>
+        <!-- <p> profit/loss </p> -->
+        <td><%= number_to_currency(company.price_history_dailies.last.close - (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares))) %></td>
+        <!-- <p> dividend yield </p> -->
+        <td><%= number_to_percentage(company.dividend_yield, precision: 2) %></td>
+        <!-- <p> yield on cost </p> -->
+        <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+        <!-- <p> dividend per share </p> -->
+        <td><%= number_to_currency(company.company_infos.last.dividend_per_share) %></td>
+        <!-- <p> Dividend Annual Income </p> -->
+        <td><%= number_to_currency(company.company_infos.last.dividend_per_share * company.account_holdings.where(account_id: @current_user_accounts).sum(:shares)) %></td>
+        <!-- <p> Dividend Payout </p> -->
         <td></td>
-        <td><%# number_to_percentage(holding.company.dividend_yield, precision: 2) %></td>
-        <td><%# holding.yield_on_cost.round(2) %>%</td>
-        <td><%# number_to_currency(holding.stock_annual_income) %></td>
-        <td><%# holding.total_shares_owned %></td>
-      </tr> -->
-    <%# end %>
-    <%# Account.find(3).companies.uniq!.each do |company| %>
-      <% @account.companies.uniq.each do |company| %>
-        <tr>
-          <!-- <p> ticker </p> -->
-          <td><%= company.symbol%> <br> <%= link_to company.name, '#' %></td>
-          <!-- <p> shares </p> -->
-          <td><%= @account.account_holdings.sum(:shares) %></td>
-          <!-- <p> price </p> -->
-          <td><%= company.price_history_dailies.last.close %></td>
-          <!-- <p> change </p> -->
-          <td></td>
-          <!-- <p> average cost </p> -->
-          <td><%= (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)).round(2) %></td>
-          <!-- <p> profit/loss </p> -->
-          <td><%= (company.price_history_dailies.last.close - (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares))).round(2) %></td>
-          <!-- <p> dividend yield </p> -->
-          <td><%= number_to_percentage(company.dividend_yield, precision: 2) %></td>
-          <!-- <p> yield on cost </p> -->
-          <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
-          <!-- <p> dividend per share </p> -->
-          <td><%= company.company_infos.last.dividend_per_share %></td>
-          <!-- <p> Dividend Annual Income </p> -->
-          <td><%= (company.company_infos.last.dividend_per_share * @account.account_holdings.sum(:shares)) %></td>
-          <!-- <p> Dividend Payout </p> -->
-          <td></td>
-        </tr>
-
-      <% end %>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
-<p>Total amount of shares owned: <%= @account.account_holdings.sum(:shares) %></p>
-<p>Total amount of money invested: <%= @account.account_holdings.sum(:total_cost) %></p>
-<p>Total amount of annual income: <%= @sum.sum %></p>
+<p>Total amount of shares owned: <%# @account.account_holdings.sum(:shares) %></p>
+<p>Total amount of money invested: <%# @account.account_holdings.sum(:total_cost) %></p>
+<p>Total amount of annual income: <%# @sum.sum %></p>
 <br>
 <%# company.dividend_histories.last.frequency %>
 <%# Company.find(55).company_infos.last.dividend_per_share %>
@@ -75,39 +57,6 @@
 
 <%# total_shares_owned = Company.find(55).account_holdings.sum(:shares) %>
 <%# annual_dividend_payout = (Company.find(55).company_infos.last.dividend_per_share * Company.find(55).account_holdings.sum(:shares)) %>
-<!-- <table class='table'>
-  <thead>
-  <tr>
-  <th scope='col'>TICKER</th>
-  <th scope='col'>SHARES</th>
-  <th scope='col'>PRICE</th>
-  <th scope='col'>CHANGE</th>
-  <th scope='col'>AVERAGE COST</th>
-  <th scope='col'>PROFIT/LOSS</th>
-  <th scope='col'>DIVIDEND YIELD</th>
-  <th scope='col'>YIELD ON COST</th>
-  <th scope='col'>ANNUAL INCOME</th>
-  <th scope='col'>misc</th>
-  </tr>
-  </thead>
-  <tbody class="table-striped">
-  <%# @account.companies.each do |company| %>
-    #       <tr>
-    <td><%# link_to company.symbol, company_analysis_path(company) %></td>
-    <td><%# company.account_holdings.sum(:shares) %></td>
-    <td><%# number_to_currency(company.last_price) %></td>
-    <td></td>
-    <td><%# number_to_currency(company.account_holdings.average(:cost_per_share)) %></td>
-    <td></td>
-    <td><%# number_to_percentage(company.account_holdings.dividend_yield, precision: 2) %></td>
-    <td><%# holding.yield_on_cost %></td>
-    <td><%# number_to_currency(holding.company.annual_dividend_income) %></td>
-    <td></td>
-    </tr>
-    <%# end %>
-    </tbody>
-    </table> -->
-    <%# end %>
 
     <div>
       <%= link_to "Edit this account", edit_account_path(@account) %> |
@@ -115,14 +64,3 @@
 
       <%= button_to "Destroy this account", @account, method: :delete %>
     </div>
-    <%# render 'shared/table' %>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>test</h1>
-
-    <%#= current_user.accounts.first.account_name %><br>
-    <%# current_user.accounts.first.account_holdings.first.shares %>
-    <%# current_user.accounts.first.account_holdings.first.total_cost %>
-

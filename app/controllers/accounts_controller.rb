@@ -9,8 +9,15 @@ class AccountsController < ApplicationController
   # GET /accounts/1 or /accounts/1.json
   def show
     @accounts = current_user.accounts
+    @current_user_accounts = current_user.accounts.find(params[:id])
     @sum = @account.companies.uniq.map do |company|
       ((company.company_infos.last.dividend_per_share * company.account_holdings.sum(:shares)))
+    end
+    @account_info = current_user.accounts.each(&:id)
+    @account_shares = current_user.accounts.map do |acct|
+      # acct.id
+      # acct.account_name
+      acct.account_holdings.sum(:shares)
     end
   end
 

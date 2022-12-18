@@ -36,8 +36,17 @@ class DashboardController < ApplicationController
 
   def tester
     @accounts = current_user.accounts
-    @sum = current_user.accounts.find(3).companies.uniq.map do |company|
-      ((company.company_infos.last.dividend_per_share * company.account_holdings.sum(:shares)))
+    # @sum = current_user.accounts.find(3).companies.uniq.map do |company|
+    #   ((company.company_infos.last.dividend_per_share * company.account_holdings.sum(:shares)))
+    # end
+    @account_info = current_user.accounts.each(&:id)
+    @account_shares = current_user.accounts.map do |acct|
+      # acct.id
+      # acct.account_name
+      acct.account_holdings.sum(:shares)
+    end
+    @account_sum = current_user.accounts.map do |acct|
+      acct.account_holdings.sum(:total_cost)
     end
   end
 

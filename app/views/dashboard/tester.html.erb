@@ -1,5 +1,7 @@
 <p>Total Amount Invested</p>
-
+<h1>
+  <%= number_to_currency(@account_sum.sum) %>
+</h1>
 <p>Invested Principle <small>( increase / descrease )</small></p>
 
 <ul>
@@ -17,7 +19,6 @@
 <p>Yield (Cost Basis)</p>
 
 <p>Annual Income</p>
-<%= @sum.sum %>
 <p>Drip Adjusted Income</p>
 
 <hr>
@@ -44,62 +45,34 @@
     </tr>
   </thead>
   <tbody>
+    <% @account_info.each do |acct| %>
+      <% acct.companies.uniq.each do |companies| %>
+        <tr>
+          <td><%= companies.symbol %><br> <%= companies.name %></td>
+          <td><%= companies.account_holdings.sum(:shares)%></td>
+          <td><%= number_to_currency(companies.price_history_dailies.last.close) %></td>
+          <td></td>
+          <td><%= number_to_currency(companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) %></td>
+          <td><%= number_to_currency(companies.price_history_dailies.last.close - (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares))) %></td>
+          <td><%= number_to_percentage(companies.dividend_yield, precision: 2) %></td>
+          <td><%= number_to_percentage(companies.company_infos.last.dividend_per_share / (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+          <td><%= number_to_currency(companies.company_infos.last.dividend_per_share * companies.account_holdings.sum(:shares)) %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    <% end %>
     <tr>
       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td><%= @account_shares[1] %></td>
     </tr>
-    <tr>
-      <td><%= Company.first.symbol %><br><small style='font-size: 0.65em'><%= Company.first.name %></small></td>
-
       <!-- TODO: change from individual call to each block [Shares] -->
-      <td><%= User.first.accounts.first.account_holdings.find_by(company_id: 1).shares %></td>
-
-      <td><%= Company.first.price_history_dailies.last.close %></td>
-
       <!-- TODO: correct the change displayed in pricing should show the change in cost compared to previous day [Change] -->
-      <td> <%= User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) %><small style="font-size: 0.5rem"><%# User.first.accounts.first.account_holdings.find_by(company_id: 1).profit_loss.round(2) /  %>%</small></td>
-
       <!-- TODO: change from individual call to each block [Average Cost] -->
-      <td><%= User.first.accounts.first.account_holdings.first.cost_per_share %></td>
-
       <!-- TODO: [Profit/Loss] update position profit/loss -->
-      <td><%= (Company.first.price_history_dailies.last.close - User.first.accounts.first.account_holdings.first.cost_per_share).round(2) %> </td>
-
       <!-- NOTE: [Dividend Yield] comes from company quarterly info report -->
-      <td><%= User.first.accounts.first.companies.first.dividend_yield %>%</td>
-
       <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * = of shares purchased) -->
-      <td><%= ((Company.first.dividend_per_share / User.first.accounts.first.account_holdings.first.cost_per_share ) * 100) %>%</td>
-
-
       <!-- NOTE: [Annual Income] update with sum of shares x last dividend on record-->
-      <td><%= Company.first.company_infos.last.dividend_per_share * User.first.accounts.first.account_holdings.first.shares %></td>
-      <!-- <td><%# User.first.accounts.first.account_holdings.first.shares %></td> -->
-
-
       <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (= of shares * dividend_payout) -->
-      <td><%= Company.first.company_infos.last.dividend_per_share * AccountHolding.first.shares %></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
 
