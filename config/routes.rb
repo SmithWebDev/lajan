@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'dashboard#tester'
+  root 'dashboard#sandbox'
   get 'user/profile'
   get 'user/accounts'
   get 'user/connections'

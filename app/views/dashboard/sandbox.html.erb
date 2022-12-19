@@ -1,0 +1,66 @@
+<h1>Welcome back, <%= current_user.username %></h1>
+<hr>
+
+
+<ul>
+  <li> <%= link_to 'Portfolio Summary', '#', class: 'active' %> </li>
+  <% @accounts.each do |account| %>
+    <li>
+      <%= link_to account.account_name, account_path(account) %>
+    </li>
+  <% end %>
+</ul>
+<ul>
+  <li><%= link_to '+ Add Portfolio', new_account_path(@account) %></li>
+</ul>
+<hr>
+<hr>
+<!-- TODO: Remove In-Line styling -->
+<h1>Dashboard Information Table <small style="font-size: .75rem">(single acct, position)</small></h1>
+<hr>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Ticker</th>
+      <th>Shares</th>
+      <th>Price</th>
+      <th>Change</th>
+      <th>Average Cost</th>
+      <th>Profit/ Loss</th>
+      <th>Dividend Yield</th>
+      <th>Yield on Cost</th>
+      <th>Annual Dividend Payment</th>
+      <th>Annual Income</th>
+      <th>Drip Adjusted Income</th>
+    </tr>
+  </thead>
+  <tbody>
+    TODO: Summary should show information from all User Accounts/Portfolios
+    <br>
+    <%= current_user.accounts[0].account_name %>
+    <tr>
+      <%# NOTE Ticker %>
+      <td></td>
+      <%# NOTE Shares %>
+      <td></td>
+      <%# NOTE Price %>
+      <td></td>
+      <%# NOTE Change %>
+      <td></td>
+      <%# NOTE Average Cost %>
+      <td></td>
+      <%# NOTE Profit/Loss %>
+      <td></td>
+      <%# NOTE Dividend Yield %>
+      <td></td>
+      <%# NOTE Yield on Cost %>
+      <td></td>
+      <%# NOTE Annual Dividend Payout %>
+      <td></td>
+      <%# NOTE Annual Dividend Income %>
+      <td></td>
+      <%# NOTE Annual Adjusted Drip Income %>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

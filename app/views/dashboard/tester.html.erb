@@ -1,32 +1,26 @@
-<p>Total Amount Invested</p>
-<h1>
-  <%= number_to_currency(@account_sum.sum) %>
-</h1>
-<p>Invested Principle <small>( increase / descrease )</small></p>
 
-<ul>
-  <li> <%= link_to 'Summary Dashboard', '#' %> </li>
-  <% @accounts.each do |account| %>
-    <li>
-      <%= link_to account.account_name, account_path(account) %>
-    </li>
-  <% end %>
-</ul>
+
+<!-- <p>Total Amount Invested</p> -->
+<h1> <%= number_to_currency(@account_sum.sum) %> </h1>
+<!-- <p>Invested Principle <small>( increase / descrease )</small></p> -->
+<br>
+<br>
+
+
+
+<div>
+  <p>Portfolio Yield</p>
+
+  <p>Yield (Cost Basis)</p>
+
+  <p>Annual Income</p>
+  <p>Drip Adjusted Income</p>
+</div>
+
+<br>
 <hr>
-
-<p>Portfolio Yield</p>
-
-<p>Yield (Cost Basis)</p>
-
-<p>Annual Income</p>
-<p>Drip Adjusted Income</p>
-
 <hr>
-
-<hr>
-<!-- NOTE: Remove In-Line styling -->
-<h1>Dashboard Information Table <small style="font-size: .75rem">(single acct, position)</small></h1>
-<hr>
+<!-- <p> [GOAL] </p> -->
 <hr>
 
 <table class='table'>
@@ -45,39 +39,41 @@
     </tr>
   </thead>
   <tbody>
-    <% @account_info.each do |acct| %>
-      <% acct.companies.uniq.each do |companies| %>
+    <%# @account_info.each do |acct| %>
+      <%# acct.companies.uniq.each do |companies| %>
         <tr>
-          <td><%= companies.symbol %><br> <%= companies.name %></td>
-          <td><%= companies.account_holdings.sum(:shares)%></td>
-          <td><%= number_to_currency(companies.price_history_dailies.last.close) %></td>
+      <!-- NOTE: [Shares] -->
+          <td><%#= companies.symbol %><br> <%# companies.name %></td>
+
+
+      <!-- NOTE: [Change] -->
+          <td><%#= companies.account_holdings.sum(:shares)%></td>
+
+      <!-- NOTE: [Average Cost] -->
+          <td><%#= number_to_currency(companies.price_history_dailies.last.close) %></td>
+
+      <!-- NOTE: [Profit/Loss] -->
           <td></td>
-          <td><%= number_to_currency(companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) %></td>
-          <td><%= number_to_currency(companies.price_history_dailies.last.close - (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares))) %></td>
-          <td><%= number_to_percentage(companies.dividend_yield, precision: 2) %></td>
-          <td><%= number_to_percentage(companies.company_infos.last.dividend_per_share / (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
-          <td><%= number_to_currency(companies.company_infos.last.dividend_per_share * companies.account_holdings.sum(:shares)) %></td>
-          <td></td>
+
+      <!-- NOTE: [Dividend Yield] -->
+          <td><%#= number_to_currency(companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) %></td>
+
+      <!-- NOTE: [Yield on Cost] -->
+          <td><%#= number_to_currency(companies.price_history_dailies.last.close - (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares))) %></td>
+
+      <!-- NOTE: [Annual Income] -->
+          <td><%#= number_to_percentage(companies.dividend_yield, precision: 2) %></td>
+
+      <!-- NOTE: [Drip Adjusted Income] -->
+          <td><%#= number_to_percentage(companies.company_infos.last.dividend_per_share / (companies.account_holdings.sum(:total_cost) / companies.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+          <td><%#= number_to_currency(companies.company_infos.last.dividend_per_share * companies.account_holdings.sum(:shares)) %></td>
         </tr>
-      <% end %>
-    <% end %>
-    <tr>
-      <td></td>
-      <td><%= @account_shares[1] %></td>
-    </tr>
-      <!-- TODO: change from individual call to each block [Shares] -->
-      <!-- TODO: correct the change displayed in pricing should show the change in cost compared to previous day [Change] -->
-      <!-- TODO: change from individual call to each block [Average Cost] -->
-      <!-- TODO: [Profit/Loss] update position profit/loss -->
-      <!-- NOTE: [Dividend Yield] comes from company quarterly info report -->
-      <!-- NOTE: [Yield on Cost] each purchased position needs to follow (CPS * = of shares purchased) -->
-      <!-- NOTE: [Annual Income] update with sum of shares x last dividend on record-->
-      <!-- NOTE: [Drip Adjusted Income] calculate the incoming dividend payment (= of shares * dividend_payout) -->
+      <%# end %>
+    <%# end %>
   </tbody>
 </table>
 
-<hr>
-
+<br>
 <hr>
 <h1>Sector Pie chart</h1>
 
@@ -95,7 +91,7 @@
 <p> Companies in TRADE & SERVICES sector: <%= Company.where(sector: 'TRADE & SERVICES').count %> (<%= ((Company.where(sector: 'TRADE & SERVICES').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
 <p> Companies in REAL ESTATE & CONSTRUCTION sector: <%= Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count %> (<%= ((Company.where(sector: 'REAL ESTATE & CONSTRUCTION').count.to_f / Company.all.count) * 100).round(1) %> %) </p>
 
-<%= 17 + 15 + 10 + 19 + 11 + 8 +29 %>
+<%# 17 + 15 + 10 + 19 + 11 + 8 +29 %>
 
 
 <hr>

@@ -28,13 +28,13 @@
         <!-- <p> change </p> -->
         <td></td>
         <!-- <p> average cost </p> -->
-        <td><%= number_to_currency(company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) %></td>
+        <td><%= number_to_currency(company.account_holdings.where(account_id: @current_user_accounts).sum(:total_cost) / company.account_holdings.where(account_id: @current_user_accounts).sum(:shares)) %></td>
         <!-- <p> profit/loss </p> -->
-        <td><%= number_to_currency(company.price_history_dailies.last.close - (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares))) %></td>
+        <td><%= number_to_currency(company.price_history_dailies.last.close - (company.account_holdings.where(account_id: @current_user_accounts).sum(:total_cost) / company.account_holdings.where(account_id: @current_user_accounts).sum(:shares))) %></td>
         <!-- <p> dividend yield </p> -->
         <td><%= number_to_percentage(company.dividend_yield, precision: 2) %></td>
         <!-- <p> yield on cost </p> -->
-        <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+        <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.where(account_id: @current_user_accounts).sum(:total_cost) / company.account_holdings.where(account_id: @current_user_accounts).sum(:shares)) * 100, precision: 2) %></td>
         <!-- <p> dividend per share </p> -->
         <td><%= number_to_currency(company.company_infos.last.dividend_per_share) %></td>
         <!-- <p> Dividend Annual Income </p> -->
