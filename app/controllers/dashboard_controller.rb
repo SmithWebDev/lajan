@@ -51,16 +51,17 @@ class DashboardController < ApplicationController
 
   def sandbox
     @accounts = current_user.accounts
+    @current_user_accounts = current_user.accounts[0]
   end
 
   private
 
   def set_current_account
     @account = if session[:current_account_id].present?
-                 Account.find(session[:current_account_id])
-               else
-                 current_user.accounts.first
-               end
+      Account.find(session[:current_account_id])
+    else
+      current_user.accounts.first
+    end
   end
 
   def set_company_info

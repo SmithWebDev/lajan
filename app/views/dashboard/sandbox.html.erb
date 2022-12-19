@@ -1,5 +1,5 @@
 <h1>Welcome back, <%= current_user.username %></h1>
-<hr>
+hr>
 
 
 <ul>
@@ -16,7 +16,7 @@
 <hr>
 <hr>
 <!-- TODO: Remove In-Line styling -->
-<h1>Dashboard Information Table <small style="font-size: .75rem">(single acct, position)</small></h1>
+<h1>Portfolio Summary Table <small style="font-size: .75rem">(all accts, positions)</small></h1>
 <hr>
 <table class='table'>
   <thead>
@@ -35,32 +35,40 @@
     </tr>
   </thead>
   <tbody>
-    TODO: Summary should show information from all User Accounts/Portfolios
-    <br>
-    <%= current_user.accounts[0].account_name %>
-    <tr>
-      <%# NOTE Ticker %>
-      <td></td>
-      <%# NOTE Shares %>
-      <td></td>
-      <%# NOTE Price %>
-      <td></td>
-      <%# NOTE Change %>
-      <td></td>
-      <%# NOTE Average Cost %>
-      <td></td>
-      <%# NOTE Profit/Loss %>
-      <td></td>
-      <%# NOTE Dividend Yield %>
-      <td></td>
-      <%# NOTE Yield on Cost %>
-      <td></td>
-      <%# NOTE Annual Dividend Payout %>
-      <td></td>
-      <%# NOTE Annual Dividend Income %>
-      <td></td>
-      <%# NOTE Annual Adjusted Drip Income %>
-      <td></td>
-    </tr>
+    <% @current_user_accounts.companies.uniq.each do |company| %>
+      <tr>
+        <%# NOTE Ticker %>
+        <td><%= link_to company.symbol, '#' %> <br> <small><%= company.name %></small></td>
+        <%# NOTE Shares %>
+        <td><%= company.account_holdings.sum(:shares) %></td>
+        <%# NOTE Price %>
+        <td><%= number_to_currency(company.price_history_dailies.last.close) %></td>
+        <%# NOTE Change %>
+        <td></td>
+        <%# NOTE Average Cost %>
+        <td><%= number_to_currency(company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) %></td>
+        <%# NOTE Profit/Loss %>
+        <td><%= number_to_currency(company.price_history_dailies.last.close - (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares))) %></td>
+        <%# NOTE Dividend Yield %>
+        <td><%= number_to_percentage(company.dividend_yield, precision: 2) %></td>
+        <%# NOTE Yield on Cost %>
+        <td><%= number_to_percentage(company.company_infos.last.dividend_per_share / (company.account_holdings.sum(:total_cost) / company.account_holdings.sum(:shares)) * 100, precision: 2) %></td>
+        <%# NOTE Annual Dividend Payout %>
+        <td><%= number_to_currency(company.company_infos.last.dividend_per_share) %></td>
+        <%# NOTE Annual Dividend Income %>
+        <td><%= number_to_currency(company.company_infos.last.dividend_per_share * company.account_holdings.sum(:shares)) %></td>
+        <%# NOTE Annual Adjusted Drip Income %>
+        <td></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
+<hr>
+
+
+
+<br>
+<hr>
+<hr>
+<h1>Sector Pie chart</h1>
+<hr>

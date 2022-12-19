@@ -46,8 +46,10 @@
   </tbody>
 </table>
 
+<%= @current_user_accounts.companies[2].company_infos.last.dividend_per_share %>
+<%= @current_user_accounts.companies[2].name %>
 <p>Total amount of shares owned: <%# @account.account_holdings.sum(:shares) %></p>
-<p>Total amount of money invested: <%# @account.account_holdings.sum(:total_cost) %></p>
+<p>Total amount of money invested: <%# @account.account_holdings.sum(:tota_cost) %></p>
 <p>Total amount of annual income: <%# @sum.sum %></p>
 <br>
 <%# company.dividend_histories.last.frequency %>
